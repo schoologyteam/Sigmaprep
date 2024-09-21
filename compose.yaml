@@ -25,7 +25,7 @@ services:
     develop:
       watch:
         - path: ./backend/
-          action: sync
+          action: rebuild
           target: /usr/local/app/src
         - path: ./backend/package.json
           action: rebuild
@@ -41,10 +41,11 @@ services:
     build: "frontend/."
     ports:
       - "5173:5173"
+    env_file: "../secrets.env"
     develop:
       watch:
         - path: ./frontend/src
-          action: sync
+          action: rebuild
           target: /usr/local/app/src
         - path: ./frontend/package.json
           action: rebuild

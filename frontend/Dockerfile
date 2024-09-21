@@ -20,4 +20,4 @@ COPY . .
 
 USER root
 
-CMD npm run dev
+CMD sh -c 'echo "NODE_ENV is: $NODE_ENV"; if [ "$NODE_ENV" = "prod" ]; then npm run build; else npm run dev; fi'
