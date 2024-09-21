@@ -1,0 +1,32 @@
+{
+  "main": "server.js",
+  "type": "module",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "connect-redis": "^7.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.3.1",
+    "express-session": "^1.18.0",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.11.0",
+    "nodemon": "^3.1.4",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "redis": "^4.7.0"
+  },
+  "imports": {
+    "#models/*": "./models/*",
+    "#routes/*": "./routes/*",
+    "#db/*": "./database/*",
+    "#utils/*": "./utils/*",
+    "#config/*": "./config/*",
+    "#middleware/*": "./middleware/*"
+  },
+  "scripts": {
+    "start": "nodemon server.js"
+  }
+}

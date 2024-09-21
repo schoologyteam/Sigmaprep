@@ -1,0 +1,28 @@
+/* CSS for the custom complex animation */
+@keyframes coolAnimation {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.2) rotate(15deg);
+  }
+  50% {
+    transform: scale(1.1) rotate(-15deg);
+  }
+  75% {
+    transform: scale(1.2) rotate(15deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* Apply animation when hovered */
+.cool-hover:hover {
+  animation: coolAnimation 0.8s ease-in-out;
+}
+
+/* Apply animation when clicked (active state) */
+.cool-hover:active {
+  animation: coolAnimation 0.8s ease-in-out;
+}

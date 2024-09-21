@@ -1,0 +1,61 @@
+.quackprep {
+  display: inline-block;
+  position: relative;
+}
+
+.quackprep:after {
+  content: '.com';
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  font-size: 0.5em;
+  position: absolute;
+  transform: translateY(10px); /* Start slightly below */
+}
+
+.quackprep:hover:after {
+  opacity: 1;
+  transform: translateY(0); /* Move to original position */
+}
+
+.logo {
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+.logo:hover {
+  transform: rotate(360deg);
+}
+
+/**
+old code pls keep
+
+.quackprep {
+  display: inline-block;
+  position: relative;
+}
+  
+
+.quackprep:after {
+  content: '';
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.quackprep:hover:after {
+  content: '.com';
+  opacity: 1;
+  position: absolute;
+  font-size: 0.5em;
+  vertical-align: super;
+}
+
+.logo {
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+.logo:hover {
+  transform: rotate(360deg);
+}
+
+**/

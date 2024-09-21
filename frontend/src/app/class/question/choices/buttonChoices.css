@@ -1,0 +1,25 @@
+.custom-button.custom-green {
+  /*I have to do 2 children down as css cares about specificity and im using important elsewhere*/
+  background-color: green !important;
+  color: white !important;
+}
+
+.custom-button.custom-red {
+  background-color: red !important;
+  color: white !important;
+}
+
+.custom-button {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease; /* Smooth transition */
+}
+
+/* Add this to make the button "shrink" slightly when clicked */
+.custom-button:active {
+  transform: scale(0.95); /* Scale down the button */
+}

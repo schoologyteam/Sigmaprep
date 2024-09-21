@@ -1,0 +1,219 @@
+/* Import your custom Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* Override Semantic UI's global font-family */
+body,
+.ui {
+  font-family: 'Roboto', sans-serif !important; /* Apply the font globally */
+}
+
+/* Override specific Semantic UI components */
+.ui.button,
+.ui.menu,
+.ui.header,
+.ui.input,
+.ui.dropdown {
+  font-family: 'Roboto', sans-serif !important;
+}
+
+/* Additional font styles */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: 700;
+}
+
+.ui.segment,
+.ui.table,
+.ui.modal {
+  font-family: 'Roboto', sans-serif !important;
+}
+:root {
+  --primary-color: #393e46; /* Dark Charcoal for primary elements */
+  --secondary-color: #eeeeee; /* Light Gray for secondary elements */
+  --menu-background: rgb(49, 43, 43); /* Very Light Gray for menu background */
+  --body-background: #f7f7f7; /* Very Light Gray for body background */
+  --header-color: #393e46; /* Dark Charcoal for headers */
+  --segment-background: #eeeeee; /* Light Gray for segments or cards */
+  --input-background: #f7f7f7; /* Very Light Gray for input fields */
+  --input-border: #929aab; /* Muted Blue-Gray for input borders */
+  /*--dropdown-background: gray; /* Light Gray for dropdown background */
+}
+
+/* Button styles */
+.ui.button {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+/* Menu styles */
+.ui.menu {
+  background-color: var(--menu-background) !important;
+  color: white !important;
+}
+
+/* Body styles */
+body {
+  background-color: var(--body-background) !important;
+}
+
+/* Header styles */
+.ui.header {
+  color: var(--header-color) !important;
+}
+
+/* Segment styles */
+.ui.segment {
+  background-color: var(--segment-background) !important;
+  color: var(--header-color) !important;
+}
+
+/* Input styles */
+.ui.input input {
+  background-color: var(--input-background) !important;
+  border-color: var(--input-border) !important;
+  color: var(--header-color) !important; /* Text color in inputs */
+}
+
+/* Dropdown styles */
+.ui.dropdown {
+  background-color: var(--dropdown-background) !important;
+  border-color: var(--input-border) !important;
+}
+
+.ui.dropdown .menu > .item {
+  color: var(--header-color) !important; /* Dropdown item text color */
+}
+
+/* Table styles */
+.ui.table {
+  background-color: var(--segment-background) !important;
+  border-color: var(--input-border) !important;
+}
+
+.ui.table thead th {
+  background-color: var(--primary-color) !important;
+  color: white !important; /* Header text color */
+}
+
+/* Popup styles */
+.ui.popup {
+  background-color: var(--dropdown-background) !important;
+  border-color: var(--input-border) !important;
+  color: var(--header-color) !important; /* Popup text color */
+}
+
+/* Modal styles */
+.ui.modal {
+  background-color: var(--segment-background) !important;
+  color: var(--header-color) !important;
+}
+
+.ui.menu {
+  background-color: var(--menu-background) !important; /* Darker background for the menu */
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  justify-content: center;
+}
+
+.ui.menu .item {
+  color: var(--input-background) !important; /* Light gray text for better readability on dark background */
+  font-weight: bold !important;
+}
+
+.ui.menu .item:hover {
+  background-color: var(--dropdown-background) !important;
+}
+
+.ui.menu .item.active {
+  border-bottom: 2px solid var(--secondary-color) !important;
+}
+
+.ui.menu .header {
+  font-size: 1.5em;
+  color: var(--input-background) !important; /* Ensure the header text color matches the menu items */
+}
+
+.ui.icon.header .icon {
+  margin-right: 0.5em;
+  color: var(--input-background) !important; /* Ensure the icon color matches the text */
+}
+
+.hero-section {
+  background-color: var(--menu-background);
+  padding: 10em 0;
+  color: var(--input-background);
+  text-align: center;
+  background-image: url('https://via.placeholder.com/1200x600');
+  background-size: cover;
+  background-position: center;
+  width: 100%; /* Ensure full width */
+}
+
+.features-section {
+  padding: 5em 0;
+  background-color: var(--secondary-color);
+  width: 100%; /* Ensure full width */
+}
+
+.testimonial-section {
+  padding: 4em 0;
+  background-color: var(--dropdown-background);
+  width: 100%; /* Ensure full width */
+}
+
+.hero-header {
+  font-size: 4em;
+  margin-bottom: 0.5em;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-subheader {
+  font-size: 1.5em;
+  margin-bottom: 2em;
+  color: var(--input-background);
+}
+
+.feature-card {
+  background-color: var(--menu-background) !important;
+  color: var(--input-background) !important;
+}
+
+.feature-card .header {
+  color: var(--secondary-color) !important;
+}
+
+.testimonial-section p {
+  color: var(--input-background);
+  font-style: italic;
+  margin: 1em 0;
+}
+
+.ui.button.purple {
+  background-color: var(--secondary-color) !important;
+  color: #fff !important;
+}
+
+.ui.button.purple:hover {
+  background-color: var(--dropdown-background) !important;
+}
+
+.ui.segment.inverted {
+  background-color: var(--menu-background) !important;
+}
+
+.features-section .ui.grid {
+  width: 100%;
+  margin: 0; /* Remove any default margins */
+}
+
+.testimonial-section .ui.grid {
+  width: 100%;
+  margin: 0; /* Remove any default margins */
+}

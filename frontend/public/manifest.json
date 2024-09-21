@@ -1,0 +1,17 @@
+{
+  "name": "QuackPrep",
+  "short_name": "QuackPrep",
+  "description": "A platform for students to learn, practice, study, and have fun.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4CAF50",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/img/quackprep_logo.webp",
+      "sizes": "500x500",
+      "type": "image/webp"
+    }
+  ]
+}
