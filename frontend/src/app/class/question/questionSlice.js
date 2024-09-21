@@ -5,7 +5,7 @@ import { createSelector } from 'reselect';
 const GET_QUESTIONS_BY_TOPIC = 'app/class/topic/question/GET_QUESTIONS_BY_TOPIC';
 
 export function getQuestionsByTopic(topic_id) {
-  return standardApiCall('get', `api/question/${topic_id}`, null, GET_QUESTIONS_BY_TOPIC, 'QuestionPage');
+  return standardApiCall('get', `/api/question/${topic_id}`, null, GET_QUESTIONS_BY_TOPIC, 'QuestionPage');
 }
 
 const DEFAULT_STATE = {

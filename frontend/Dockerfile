@@ -12,21 +12,12 @@ FROM node:${NODE_VERSION}-alpine
 
 WORKDIR /usr/app
 
-RUN npm install vite -g
+COPY package*.json ./
 
-RUN --mount=type=bind,source=package.json,target=package.json \
-    --mount=type=bind,source=package-lock.json,target=package-lock.json \
-    --mount=type=cache,target=/root/.npm \
-    npm ci --omit=dev
-
-RUN mkdir /usr/app/node_modules/.vite \
-&& chown -R node:node /usr/app/node_modules/.vite
-
-
-USER node
+RUN npm install
 
 COPY . .
 
-EXPOSE 5173
+USER root
 
 CMD npm run dev

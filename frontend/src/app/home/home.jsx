@@ -1,3 +1,4 @@
+import './home.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Header, Button, Icon, Grid, Segment, Card, Image } from 'semantic-ui-react';
 import horse from '/img/horse.webp';
@@ -58,7 +59,7 @@ export default function Home() {
 
       <Segment inverted vertical className='testimonial-section'>
         <Container textAlign='center'>
-          <Header as='h2' style={{ color: '#9370db' }}>
+          <Header as='h2' className='what-our-users-say-header'>
             What Our Users Say
           </Header>
           <p>

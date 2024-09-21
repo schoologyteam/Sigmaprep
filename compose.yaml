@@ -11,6 +11,8 @@ services:
     depends_on:
       - frontend
       - backend
+    networks:
+      - app-network
 
   ###################################################
   # Service: backend
@@ -29,6 +31,8 @@ services:
           action: rebuild
     depends_on:
       - redis
+    networks:
+      - app-network
 
   ###################################################
   # Service: client
@@ -39,11 +43,13 @@ services:
       - "5173:5173"
     develop:
       watch:
-        - path: ./client/src
+        - path: ./frontend/src
           action: sync
           target: /usr/local/app/src
-        - path: ./client/package.json
+        - path: ./frontend/package.json
           action: rebuild
+    networks:
+      - app-network
   ###################################################
   # Service: redis
   ###################################################
@@ -51,10 +57,9 @@ services:
     image: redis:latest
     ports:
       - "6379:6379"
-  ###################################################
-  # Service: phpmyadmin
-  ###################################################
-  phpmyadmin:
-    image: phpmyadmin
-    environment:
-      PMA_HOST: mysql
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

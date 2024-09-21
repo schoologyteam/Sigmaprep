@@ -33,10 +33,11 @@ export const SESSION_CONFIG = {
     sameSite: true,
   },
 };
+
 export const REDIS_CONFIG = {
-  host: process.env.REDIS_HOST,
-  host: process.env.REDIS_PORT,
+  url: "redis://redis:6379", // why does this work?
 };
+console.log(REDIS_CONFIG);
 
 export const GOOGLE_OAUTH_CONFIG = {
   clientID: process.env.GOOGLE_CLIENT_ID,

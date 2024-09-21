@@ -100,6 +100,7 @@ export default function Navbar() {
     );
     if (activePage?.includes('question') && topicId && !do_I_alr_have_a_question_pulled_in_with_the_current_topic_id) {
       dispatch(getQuestionsByTopic(topicId));
+      console.log('get questions by topic id');
     } else if (urlArr[6]) {
       dispatch(updateQuestionId(parseInt(urlArr[6])));
     }
