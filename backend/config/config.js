@@ -33,8 +33,10 @@ export const SESSION_CONFIG = {
     sameSite: true,
   },
 };
-
-export const REDIS_URL = process.env.REDIS_URL;
+export const REDIS_CONFIG = {
+  host: process.env.REDIS_HOST,
+  host: process.env.REDIS_PORT,
+};
 
 export const GOOGLE_OAUTH_CONFIG = {
   clientID: process.env.GOOGLE_CLIENT_ID,
