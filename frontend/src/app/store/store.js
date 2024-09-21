@@ -9,9 +9,9 @@ import navbarReducer from '@components/navbar/navbarSlice.js';
 import streakReducer from '../streak/streakSlice.js';
 import classReducer from '../class/classSlice.js';
 import topicReducer from '../class/topic/topicSlice.js';
-import questionsReducer from '../class/question/questionSlice.js';
+import questionsReducer from '../class/topic/question/questionSlice.js';
 import leadboardReducer from '../leaderboard/leaderboardSlice.js';
-import choicesReducer from '../class/question/choices/choicesSlice.js';
+import choicesReducer from '../class/topic/question/choices/choicesSlice.js';
 import statsReducer from '../stats/statsSlice.js';
 
 const app = combineReducers({

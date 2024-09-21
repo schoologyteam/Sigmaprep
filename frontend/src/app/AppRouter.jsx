@@ -8,7 +8,7 @@ import ClassList from './class/ClassList.jsx';
 import Leaderboard from './leaderboard/Leaderboard.jsx';
 import Stats from './stats/Stats.jsx';
 import ClassShow from './class/ClassShow.jsx';
-import QuestionPage from './class/question/QuestionPage.jsx';
+import QuestionPage from './class/topic/question/QuestionPage.jsx';
 import TopicsShow from './class/topic/TopicsShow.jsx';
 
 {
