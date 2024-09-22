@@ -49,6 +49,8 @@ services:
           target: /usr/local/app/src
         - path: ./frontend/package.json
           action: rebuild
+    depends_on:
+      - backend
     networks:
       - app-network
   ###################################################
