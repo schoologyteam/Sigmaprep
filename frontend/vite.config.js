@@ -5,9 +5,9 @@ export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
   return {
     build: { outDir: '../backend/public', emptyOutDir: true },
-    define: {
-      BACKEND_URL: JSON.stringify(env.BACKEND_URL),
-    },
+    // define: {
+    //   BACKEND_URL: JSON.stringify(env.BACKEND_URL),
+    // },
     plugins: [react()],
     server: {
       hmr: false,
