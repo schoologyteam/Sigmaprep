@@ -72,12 +72,22 @@ export async function upsertGroupInClass(
 export async function deleteGroupById(user_id, group_id) {
   return await cascadeSetDeleted(user_id, "group", group_id, 0, 1, 1, 1, 0);
 }
+/**
+ * This will cascade everything below it based on table props
+ */
+export async function actualDeleteGroupById(user_id, group_id) {
+  return await sqlExe.executeCommand(
+    `DELETE FROM cgroups WHERE id=:id AND created_by=:user_id`,
+    { id: group_id, user_id },
+    { verifyUserOwnsRowId: "cgroups" }
+  );
+}
 
 /**
  * Maps a link to a group
  * @param {String} link
  * @param {Number} group_id
- * @returns {Number} id that was created in group_file_inserts
+ * @returns {Promise<Number>} id that was created in group_file_inserts
  */
 export async function uploadFileLinkToGroup(link, group_id) {
   return (

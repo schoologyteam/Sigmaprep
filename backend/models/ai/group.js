@@ -12,10 +12,12 @@ import {
   uploadFileLinkToGroup,
 } from "#models/group/index.js";
 import {
+  DOMAIN_NAME,
   MAX_FILE_SIZE_IN_BYTES,
+  NODE_ENVS_AVAILABLE,
   QUACK_CREATE_GROUP_ASS_ID,
 } from "../../../constants.js";
-import { FILE_SIZE_EXCEEDED, SUCCESS } from "../../../error_codes.js";
+import { FILE_SIZE_EXCEEDED } from "../../../error_codes.js";
 import { BadRequestError } from "#utils/ApiError.js";
 import { sendEmailToUserByUserId } from "#models/account/index.js";
 import { getSchoolByClassId } from "#models/class/index.js";
@@ -32,13 +34,13 @@ function findFilesType(file) {
 
 /**
  * Uploads a file to s3 given a multer file and a bucket to upload it to.
- * @param {String} bucket
- * @param {Express.Multer.File} file must have props originalname, mimetype , buffer
+ * @param {String} folder
+ * @param {Express.Multer.File} file must have props originalname, mimetype, buffer
  */
-async function uploadFileToS3(bucket, file) {
+async function uploadFileToS3(folder, file) {
   const uuid = `${new Date().getTime()}_${file.originalname}`;
   const data_to_send = new PutObjectCommand({
-    Bucket: bucket,
+    Bucket: folder,
     Key: uuid,
     ContentType: file.mimetype,
     Body: file.buffer,
@@ -101,13 +103,21 @@ export async function etlFilesIntoGroup(files, class_id, user_id, user_prompt) {
     if (!group.id) {
       throw new Error("group id not found when group id is needed");
     }
-    // for (let i = 0; i < files.length; i++) {
-    //   const uuid = await uploadFileToS3("group_inserts", files[i]);
-    //   uploadFileLinkToGroup(
-    //     `${secrets.R2_ENDPOINT}/group_inserts/${uuid}`,
-    //     group.id
-    //   );
-    // }
+    try {
+      if (secrets.NODE_ENV === NODE_ENVS_AVAILABLE.local) {
+        for (let i = 0; i < files.length; i++) {
+          const uuid = await uploadFileToS3("group_inserts", files[i]);
+          const insert_id = await uploadFileLinkToGroup(
+            // dont want to await this.
+            `https://bucket.${DOMAIN_NAME}/group_inserts/${uuid}`,
+            group.id // TODO make a delete script thats deletes all deleted=0 and removes files not used, unless u rlly wanna save the filed I guess
+          );
+        }
+      }
+    } catch (error) {
+      console.log("failed to upload files to s3");
+      console.error(error);
+    } // just continue after this, I want this because it may result in bad data but ux matters more.
 
     for (let i = 0; i < GenGroupResponseJSON.questions.length; i++) {
       // this is server intensive can i fix this? -maddox -> no you never can and never will.
@@ -207,21 +217,11 @@ export async function etlFilesIntoGroup(files, class_id, user_id, user_prompt) {
   } catch (error) {
     if (group && group.id) {
       dlog("group detected and function failed, attempting to delete group");
-      // cascade delete group if it was created
+      //set delete group if it was created and everything under it.
       await deleteGroupById(user_id, group.id);
       dlog(`successfully cascade deleted group_id: ${group.id}`);
     }
+
     throw error; // Let the error handler middleware handle it
   }
 }
-// add assitant ids to constant FILE
-
-// testing
-// const formData = new FormData();
-// formData.append(
-//   "file",
-//   fs.createReadStream("./backend/models/group/ai/pd.pdf")
-// );
-
-// // await parsePdfIntoGroup(formData, null, null);
-// await getFormattedPdfByPdfIdMathpix("2025_01_19_8b28c5b960393964aa50g");

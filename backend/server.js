@@ -18,11 +18,14 @@ import { errorHandler } from "#middleware/errorHandler.js";
 import { getRedisClient, initRedis } from "#utils/redis.js";
 import { rateLimits } from "#middleware/rateLimit.js";
 import { secrets } from "#config/secrets.js";
+import { NODE_ENVS_AVAILABLE } from "../constants.js";
+import { maddoxMiddleware } from "#middleware/maddoxMiddleware.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+app.disable("x-powered-by"); // This removes the X-Powered-By header
 
 console.log(path.join(__dirname, "../."));
 
@@ -36,7 +39,7 @@ const corsOrigin = {
 
 console.log(secrets.NODE_ENV);
 
-if (secrets.NODE_ENV === "prod") {
+if (secrets.NODE_ENV === NODE_ENVS_AVAILABLE.prod) {
   await initRedis();
   const redisClient = getRedisClient();
 
@@ -61,6 +64,8 @@ app.use(
 );
 
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(maddoxMiddleware);
 
 // PASSPORT
 app.use(passport.initialize());

@@ -27,15 +27,10 @@ export async function setLastLoginNow(user_id) {
   if (!user_id) {
     throw new Error("Need user id idiot to dev from dev");
   }
-  try {
-    await sqlExe.executeCommand(
-      `UPDATE users SET last_login = CURRENT_TIMESTAMP WHERE id = :user_id`,
-      { user_id }
-    );
-  } catch (error) {
-    console.log("failed to update users last login");
-    console.error(error);
-  }
+  await sqlExe.executeCommand(
+    `UPDATE users SET last_login = CURRENT_TIMESTAMP WHERE id = :user_id`,
+    { user_id }
+  );
 }
 
 export async function findUserIdByProviderId(provider, provider_id) {

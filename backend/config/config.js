@@ -1,6 +1,7 @@
 import { secrets } from "#config/secrets.js";
 import OpenAI from "openai";
 import { S3Client } from "@aws-sdk/client-s3";
+import { NODE_ENVS_AVAILABLE } from "../../constants.js";
 
 export const corsOrigins = [
   "https://accounts.google.com/o/oauth2",
@@ -9,7 +10,9 @@ export const corsOrigins = [
   "https://www.quackprep.com",
   "https://quackprep.pages.dev",
 ];
-if (secrets.NODE_ENV === "local") corsOrigins.push("http://localhost:3001"); // maybe bad pratice
+if (secrets.NODE_ENV === NODE_ENVS_AVAILABLE.local) {
+  corsOrigins.push("http://localhost:3001"); // maybe bad pratice
+}
 
 export const myS3Client = new S3Client({
   region: "auto",

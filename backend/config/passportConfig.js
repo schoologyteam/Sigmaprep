@@ -125,7 +125,9 @@ passport.use(
 );
 
 passport.serializeUser(function (user, done) {
-  setLastLoginNow(user.id);
+  setLastLoginNow(user.id).catch(() =>
+    console.log("failed to update users last login")
+  );
   done(null, user.id); // user.id is what it will store in req.user
 });
 

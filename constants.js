@@ -28,3 +28,10 @@ export const ALLOWED_FILE_TYPES = [
   "image/png",
   "image/jpg",
 ];
+export const DOMAIN_NAME = "quackprep.com";
+
+export const NODE_ENVS_AVAILABLE = {
+  local: "local",
+  test: "test",
+  prod: "prod",
+};
