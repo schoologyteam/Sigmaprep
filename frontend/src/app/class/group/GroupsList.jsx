@@ -24,6 +24,7 @@ export default function GroupsList() {
   const types = GROUP_TYPES;
   const [typeFilter, setTypeFilter] = useState(searchParams.get('type') || '');
   const loading = useSelector(selectLoadingState).loadingComps.GroupsList;
+  /** @type {import('../../../../../types').Group[]} */
   const groups = selectArrayOfIncludingItems(
     useSelector(selectBINARYArrayOfStateById('app.group.groups', 'class_id', classId)),
     ['name', 'type'],

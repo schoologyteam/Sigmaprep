@@ -80,7 +80,10 @@ app.use("/api/auth", rateLimits.auth);
 // Then other middleware
 // app.use(express.static(path.join(__dirname, "./public/")));
 
-app.use("/api/ai/chatbot/", express.json({ limit: "5mb" })); // must be set before global json limit
+app.use(
+  "/api/ai/chatbot/",
+  express.json({ limit: "10kb" }) // chat bot will not have bad words middleware applied
+); // must be set before global json limit
 app.use(express.json({ limit: "10kb" })); // everything that requires req.body comes after this (fuck express)
 app.use(badwordsMiddleware);
 app.use("/api", router);
