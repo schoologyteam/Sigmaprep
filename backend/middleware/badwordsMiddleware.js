@@ -45,7 +45,7 @@ export function checkAllFieldsForBadWords(obj) {
  * @param {*} next
  * @returns
  */
-export function checkForBadWords(req, res, next) {
+export function badwordsMiddleware(req, res, next) {
   if (req.method === "POST" || req.method === "PUT" || req.method === "PATCH") {
     if (checkAllFieldsForBadWords(req.body)) {
       return errorHandler(

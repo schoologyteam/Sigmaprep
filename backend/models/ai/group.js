@@ -63,7 +63,7 @@ export async function etlFilesIntoGroup(files, class_id, user_id, user_prompt) {
     user_prompt ??
     "parse through and only respond with whats needed based on the json schema";
   dlog(`prompt given: ${user_prompt}`);
-  let group = null;
+  let group = null; // used to check if group was created
   try {
     dlog(`${files.length} files detected`);
     let mdd_res = "";
@@ -107,11 +107,11 @@ export async function etlFilesIntoGroup(files, class_id, user_id, user_prompt) {
       if (secrets.NODE_ENV === NODE_ENVS_AVAILABLE.prod) {
         for (let i = 0; i < files.length; i++) {
           const uuid = await uploadFileToS3("group_inserts", files[i]);
-          const insert_id = await uploadFileLinkToGroup(
+          uploadFileLinkToGroup(
             // dont want to await this.
             `https://bucket.${DOMAIN_NAME}/group_inserts/${uuid}`,
             group.id // TODO make a delete script thats deletes all deleted=0 and removes files not used, unless u rlly wanna save the filed I guess
-          );
+          ).catch(() => console.log(`failed to upload file ${uuid}`));
         }
       }
     } catch (error) {
@@ -211,8 +211,9 @@ export async function etlFilesIntoGroup(files, class_id, user_id, user_prompt) {
       user_id,
       `Your Group ${group.name} Has Been Added!`,
       emailHTML
-    );
+    ).catch(() => console.log(`failed to send email to user_id:${user_id}`));
     ///////////////////////////////////
+
     return group.id;
   } catch (error) {
     if (group && group.id) {

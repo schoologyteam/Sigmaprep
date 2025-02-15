@@ -8,4 +8,8 @@ export const groupSelectSchema = z.object({
   created_by: z.number().int().positive(),
   class_category: z.number().int().positive(),
   school_id: z.number().int().positive(),
+  inserted_files: z
+    .string()
+    .transform((val) => val.split(","))
+    .nullable(),
 });

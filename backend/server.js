@@ -13,7 +13,7 @@ import sqlExe from "#db/dbFunctions.js";
 import path from "path";
 import { fileURLToPath } from "url";
 import { corsOrigins } from "./config/config.js";
-import { checkForBadWords } from "#middleware/badwordsMiddleware.js";
+import { badwordsMiddleware } from "#middleware/badwordsMiddleware.js";
 import { errorHandler } from "#middleware/errorHandler.js";
 import { getRedisClient, initRedis } from "#utils/redis.js";
 import { rateLimits } from "#middleware/rateLimit.js";
@@ -63,7 +63,7 @@ app.use(
   )
 );
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true })); //idk what this does tbh
 
 app.use(maddoxMiddleware);
 
@@ -79,9 +79,10 @@ app.use("/api/auth", rateLimits.auth);
 
 // Then other middleware
 // app.use(express.static(path.join(__dirname, "./public/")));
-app.use(checkForBadWords);
+
 app.use("/api/ai/chatbot/", express.json({ limit: "5mb" })); // must be set before global json limit
-app.use(express.json({ limit: "10kb" }));
+app.use(express.json({ limit: "10kb" })); // everything that requires req.body comes after this (fuck express)
+app.use(badwordsMiddleware);
 app.use("/api", router);
 
 app.get("/*", (req, res) => {

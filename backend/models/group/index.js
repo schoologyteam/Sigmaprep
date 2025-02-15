@@ -11,12 +11,16 @@ import { groupSelectSchema } from "../../../schema/index.js";
  */
 async function selectGroups(WHERE, params) {
   const result = await sqlExe.executeCommand(
-    `SELECT g.name,g.id,g.desc,g.created_by, g.class_id, gt.type_name as type, cl.category as class_category, cl.school_id
-    FROM cgroups g JOIN group_types gt on g.type = gt.id 
+    `SELECT g.name,g.id,g.desc,g.created_by, g.class_id, gt.type_name as type,
+       cl.category as class_category, cl.school_id, GROUP_CONCAT(gfi.link) as inserted_files
+    FROM cgroups g JOIN group_types gt on g.type = gt.id
     JOIN classes cl ON g.class_id = cl.id
-    
-    WHERE g.deleted = 0 AND cl.deleted=0 AND ${WHERE} 
-    ORDER BY g.class_id ASC`,
+    LEFT JOIN group_file_inserts gfi on g.id = gfi.group_id
+
+    WHERE g.deleted = 0 AND cl.deleted=0 AND ${WHERE}
+    GROUP BY g.name, g.id, g.desc, g.created_by, g.class_id, gt.type_name, cl.category, cl.school_id
+    ORDER BY g.class_id ASC
+`,
     params
   );
   return groupSelectSchema.array().parse(result);

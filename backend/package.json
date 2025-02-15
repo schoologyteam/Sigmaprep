@@ -40,6 +40,6 @@
   },
   "scripts": {
     "seed": "node database/seed.js",
-    "start": "nodemon server.js"
+    "start": "nodemon --watch . --watch ../schema --watch ../constants.js --watch ../error_codes.js --watch ../types.ts server.js"
   }
 }
