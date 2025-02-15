@@ -32,8 +32,7 @@ export default function MarkdownRenderer({ render, components = {}, allowLinks =
     // .replace(/(?<!\\)\\n/g, '  \n') // Replace \n with two spaces and a newline
     .replace(/\\\[/g, '$$') // Replace \[ with $$ TMP FIX
     .replace(/\\\]/g, '$$')
-    .replaceAll('$', '$$')
-    .replaceAll('\\\\', '\\');
+    .replaceAll('$', '$$');
 
   if (
     !processedRender?.includes('```') &&

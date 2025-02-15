@@ -8,7 +8,7 @@ export default function BrandLogo() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   return (
-    <Menu.Item as={'a'} header onClick={() => dispatch(changeNavbarPage(navigate, '/'))}>
+    <Menu.Item as={'a'} header onClick={() => dispatch(changeNavbarPage(navigate, '/', { scrollToTop: true }))}>
       <Image alt='quackprep duck' className='logo' size='mini' src='/img/quackprep_logo.webp' />
       <span className='quackprep' style={{ fontSize: '1.2rem' }}>
         QuackPrep

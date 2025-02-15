@@ -104,7 +104,7 @@ export async function etlFilesIntoGroup(files, class_id, user_id, user_prompt) {
       throw new Error("group id not found when group id is needed");
     }
     try {
-      if (secrets.NODE_ENV === NODE_ENVS_AVAILABLE.local) {
+      if (secrets.NODE_ENV === NODE_ENVS_AVAILABLE.prod) {
         for (let i = 0; i < files.length; i++) {
           const uuid = await uploadFileToS3("group_inserts", files[i]);
           const insert_id = await uploadFileLinkToGroup(
