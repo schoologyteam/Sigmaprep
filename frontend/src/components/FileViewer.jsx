@@ -33,7 +33,7 @@ const FileViewer = ({ urls }) => {
     <div style={{ maxWidth: '100%', overflow: 'hidden' }}>
       <div
         style={{
-          minHeight: '60vh',
+          minHeight: '40vh',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -44,7 +44,7 @@ const FileViewer = ({ urls }) => {
         }}
       >
         <Segment style={{ textAlign: 'center' }}>
-          <iframe src={selectedFile} style={{ width: '30em', height: '50em', border: 'none' }}></iframe>
+          <iframe src={selectedFile} style={{ width: '40em', height: '30em', border: 'none' }}></iframe>
         </Segment>
 
         <Label ribbon style={{ position: 'absolute', left: '1rem', top: '1rem' }} color='blue'>

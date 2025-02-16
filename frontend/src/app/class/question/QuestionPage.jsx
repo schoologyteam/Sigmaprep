@@ -16,23 +16,8 @@ import { updateQuestionId } from '@app/layout/navbar/navbarSlice';
 import useIsMobile from '@utils/hooks/useIsMobile';
 import QuestionPostMain from './post/QuestionPostMain';
 import { selectQuestionsByGroupId } from './questionSlice';
-/**
- *
- * @param {Array} questions
-
- * @param {Int} id
- */
-function findQuestionById(questions, id) {
-  if (!questions || !id) {
-    return null;
-  }
-  for (let i = 0; i < questions.length; i++) {
-    if (questions[i].id == id) {
-      return { ...questions[i] };
-    }
-  }
-  return null;
-}
+import { selectGroupsState } from '../group/groupSlice';
+import ShowGroupsPdfsModal from '../group/ShowGroupsPdfsModal';
 
 function getLocalShowAIQuestions() {
   const showAIQuestions = window.localStorage.getItem('showAIQuestions');
@@ -117,8 +102,8 @@ export default function QuestionPage() {
     <Segment basic loading={questionPageLoading}>
       <CustomImageLoader content={'generating ai question (takes ~10s)'} active={generateQuestionLoading}>
         <Header style={{ fontSize: '2.5rem' }} textAlign='center'>
-          {groupName}
-        </Header>
+          {groupName} <ShowGroupsPdfsModal />
+        </Header>{' '}
         <Grid divided>
           <Grid.Row>
             {!isMobile && (
