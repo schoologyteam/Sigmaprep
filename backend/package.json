@@ -1,6 +1,11 @@
 {
   "main": "server.js",
   "type": "module",
+  "scripts": {
+    "seed": "node database/seed.js",
+    "dev": "nodemon --watch . --watch ../schema --watch ../constants.js --watch ../error_codes.js --watch ../types.ts server.js",
+    "start": "node server.js"
+  },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.744.0",
     "axios": "^1.7.9",
@@ -17,7 +22,6 @@
     "multer": "^1.4.5-lts.1",
     "mysql2": "^3.11.0",
     "nodemailer": "^6.10.0",
-    "nodemon": "^3.1.4",
     "obscenity": "^0.4.0",
     "openai": "^4.77.0",
     "passport": "^0.7.0",
@@ -38,8 +42,7 @@
     "#config/*": "./config/*",
     "#middleware/*": "./middleware/*"
   },
-  "scripts": {
-    "seed": "node database/seed.js",
-    "start": "nodemon --watch . --watch ../schema --watch ../constants.js --watch ../error_codes.js --watch ../types.ts server.js"
+  "devDependencies": {
+    "nodemon": "^3.1.9"
   }
 }
