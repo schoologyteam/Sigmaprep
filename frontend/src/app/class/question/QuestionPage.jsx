@@ -16,7 +16,6 @@ import { updateQuestionId } from '@app/layout/navbar/navbarSlice';
 import useIsMobile from '@utils/hooks/useIsMobile';
 import QuestionPostMain from './post/QuestionPostMain';
 import { selectQuestionsByGroupId } from './questionSlice';
-import { selectGroupsState } from '../group/groupSlice';
 import ShowGroupsPdfsModal from '../group/ShowGroupsPdfsModal';
 
 function getLocalShowAIQuestions() {
@@ -54,7 +53,7 @@ export default function QuestionPage() {
     if (showAIQuestions) {
       return questions;
     } else {
-      selectItemsById(questions, 'ai', 0);
+      return selectItemsById(questions, 'ai', 0);
     }
   }, [showAIQuestions, questions]);
   useEffect(() => {
@@ -90,13 +89,6 @@ export default function QuestionPage() {
   }, [selectedQuestion?.id, questionVoteLoading, questionPageLoading]);
 
   // handles selected question locally
-
-  if (!questions)
-    return (
-      <Segment loading={questionPageLoading}>
-        <Header>Loading</Header>
-      </Segment>
-    );
 
   return (
     <Segment basic loading={questionPageLoading}>

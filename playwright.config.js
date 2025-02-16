@@ -1,9 +1,4 @@
 import { defineConfig } from "playwright/test";
-import { chromium } from "playwright-extra";
-import stealth from "puppeteer-extra-plugin-stealth";
-
-// Use the stealth plugin
-chromium.use(stealth());
 
 export default defineConfig({
   name: "quackprep-tests",
@@ -25,9 +20,6 @@ export default defineConfig({
         screenshot: "only-on-failure",
         video: "on-first-retry",
         browserName: "chromium",
-        launchOptions: {
-          executablePath: chromium.executablePath(),
-        },
       },
     },
   ],

@@ -5,9 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateCurrentGroupData, changeNavbarPage, selectNavbarState } from '@app/layout/navbar/navbarSlice';
 import { selectCanAndIsEdit } from '@app/auth/authSlice';
 import GroupEditor from '@app/creator/forms/GroupEdit';
-export default function GroupCard({ id, name, class_id, description, created_by, type }) {
+import { selectSchoolBySchoolId } from '../school/schoolSlice';
+export default function GroupCard({ id, name, class_id, description, created_by, type, school_id }) {
   const edit = useSelector(selectCanAndIsEdit());
-  const { schoolName } = useSelector(selectNavbarState).navbar;
+  const schoolName = useSelector(selectSchoolBySchoolId(school_id)).school_name;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   if (edit) {

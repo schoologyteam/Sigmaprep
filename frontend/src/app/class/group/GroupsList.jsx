@@ -115,6 +115,7 @@ export default function GroupsList() {
                   class_id={group.class_id}
                   created_by={group.created_by}
                   type={group.type}
+                  school_id={group.school_id}
                 />
               );
             })}

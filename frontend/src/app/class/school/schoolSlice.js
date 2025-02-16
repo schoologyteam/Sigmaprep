@@ -1,5 +1,5 @@
 import { standardApiCall } from '@utils/api';
-import { selectBinaryItemById, selectItemById, updateArrObjectsWithNewVals } from 'maddox-js-funcs';
+import { selectItemById, updateArrObjectsWithNewVals } from 'maddox-js-funcs';
 import { selectClassState } from '../classSlice';
 
 const GET_SCHOOLS = 'app/class/school/GET_SCHOOLS';
@@ -34,3 +34,10 @@ export const selectSchoolState = createSelector(
   (state) => state.app.school.schools,
   (schools) => schools,
 );
+
+export function selectSchoolBySchoolId(school_id) {
+  return createSelector(
+    (state) => state.app.school.schools,
+    (schools) => selectItemById(schools, 'id', school_id),
+  );
+}
