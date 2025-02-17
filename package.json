@@ -13,7 +13,6 @@
   "devDependencies": {
     "@eslint/js": "^9.16.0",
     "@typescript-eslint/eslint-plugin": "^8.22.0",
-    "concurrently": "^9.0.1",
     "eslint": "^9.16.0",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.1.0",
@@ -23,6 +22,7 @@
     "playwright": "^1.49.0"
   },
   "dependencies": {
+    "concurrently": "^9.0.1",
     "dotenv": "^16.4.7",
     "form-data": "^4.0.1",
     "rand-seed": "^2.1.7",
