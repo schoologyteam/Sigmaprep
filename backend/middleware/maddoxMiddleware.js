@@ -1,4 +1,5 @@
-import { corsOrigins } from "#config/config.js";
+import { secrets } from "#config/secrets";
+import { NODE_ENVS_AVAILABLE } from "../../constants";
 
 /**
  *
@@ -7,7 +8,9 @@ import { corsOrigins } from "#config/config.js";
  * @param {Function} next
  */
 export function maddoxMiddleware(req, res, next) {
-  if (req.originalUrl?.includes("auth/google")) {
+  if (secrets.NODE_ENV !== NODE_ENVS_AVAILABLE.prod) {
+    next();
+  } else if (req.originalUrl?.includes("auth/google")) {
     next();
   } else if (req.headers?.["x-powered-by"] === "axios") {
     next();
