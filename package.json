@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "npm i && concurrently --kill-others-on-fail --success=first \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "test": "npm i && concurrently --kill-others-on-fail --success=first \"npm run start:backend\" \"npm run dev:frontend\"",
     "start:backend": "cd backend && npm i && npm start",
     "dev:backend": "cd backend && npm i && npm run dev",
     "build:frontend": "cd frontend && npm i && npm run build",
