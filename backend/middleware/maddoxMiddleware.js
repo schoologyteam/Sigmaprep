@@ -1,5 +1,5 @@
-import { secrets } from "#config/secrets";
-import { NODE_ENVS_AVAILABLE } from "../../constants";
+import { secrets } from "#config/secrets.js";
+import { NODE_ENVS_AVAILABLE } from "../../constants.js";
 
 /**
  *
@@ -9,7 +9,7 @@ import { NODE_ENVS_AVAILABLE } from "../../constants";
  */
 export function maddoxMiddleware(req, res, next) {
   if (secrets.NODE_ENV !== NODE_ENVS_AVAILABLE.prod) {
-    next();
+    next(); // npx wait on kept trying to ping the server but failed cuz of this lol
   } else if (req.originalUrl?.includes("auth/google")) {
     next();
   } else if (req.headers?.["x-powered-by"] === "axios") {
