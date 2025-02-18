@@ -49,11 +49,8 @@ jobs:
       - name: Start application
         run: |
           # Start the dev server in the background
-          npm run dev &
-
-      - name: Wait for app to be ready
-        run: npx wait-on http://localhost:3000 http://localhost:3001 --timeout 240000
-
+          npm run dev | tee npm_dev_output.log & 
+          npx wait-on http://localhost:3000 http://localhost:3001 --timeout 240000
       - name: Run Playwright tests
         run: npx playwright test
 
