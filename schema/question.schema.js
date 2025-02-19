@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const questionSelectSchema = z.object({
-  question: z.string().min(1).max(2048),
+  question: z.string().min(1),
   group_id: z.string().transform((val) => val.split(",")), // if i parse to int frontend somehow reverts to string
   id: z.number().int().positive(),
   upvotes: z.number().int(),
