@@ -587,7 +587,7 @@ export const THE_PARADIGM_SHIFT_TOWARD_OPEN_SOURCE = new Blog(
 
 export const TOP_TIME_MANAGE_STRATS = Blog.fromObject({
   title: 'Top Strategies for Managing Study Time Effectively',
-  pub_date: new Date(),
+  pub_date: new Date('2025-02-19'),
   desc: 'This article explores effective strategies for managing study time, highlighting the importance of planning, resource utilization, and consistent review.',
   read_time: '8 min',
   by: 'Maddox',
