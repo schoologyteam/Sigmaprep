@@ -24,6 +24,13 @@ export default function Auth() {
     else if (user?.id) dispatch(changeNavbarPage(navigate, '/'));
   }, [user, navigate, dispatch]);
 
+  function loginWithProvider(provider) {
+    window.open(
+      import.meta.env.MODE === 'development' ? `/api/auth/${provider}` : `https://api.quackprep.com/api/auth/${provider}`,
+      '_self',
+    );
+  }
+
   if (!user.id) {
     return (
       <Segment basic loading={loading}>
@@ -45,19 +52,31 @@ export default function Auth() {
                   <p>Start your journey to success today!</p>
                 </section>
               </div>
-              <Form
-                onSubmit={() =>
-                  window.open(
-                    import.meta.env.MODE === 'development' ? `/api/auth/google` : `https://api.quackprep.com/api/auth/google`,
-                    '_self',
-                  )
-                }
-              >
-                <Button size='large' fluid className='google-login-button h r'>
+
+              <Button.Group>
+                <Button
+                  onClick={() => {
+                    loginWithProvider('google');
+                  }}
+                  name='google'
+                  size='large'
+                  className='google-login-button h r'
+                >
                   <Icon name='google' className='google-login-icon' />
                   {logOrSignText} with Google
                 </Button>
-              </Form>
+                <Button
+                  onClick={() => {
+                    loginWithProvider('microsoft');
+                  }}
+                  name='microsoft'
+                  size='large'
+                  className='google-login-button h r'
+                >
+                  <Icon name='microsoft' color='blue' />
+                  {logOrSignText} with Microsoft
+                </Button>
+              </Button.Group>
             </Segment>
 
             <Button.Group size='large' style={{ marginTop: '1rem' }}>
@@ -72,7 +91,7 @@ export default function Auth() {
 
             <Segment basic style={{ marginTop: '2rem' }}>
               <Header>{logOrSignText}</Header>
-              {loggingIn ? <Login /> : <p>email sign up temporarily disabled, please us google signUp/login</p>}
+              {loggingIn ? <Login /> : <p>email sign up temporarily disabled, please us google or microsoft signUp</p>}
             </Segment>
 
             <Segment basic textAlign='center' style={{ marginTop: '2rem', color: '#888' }}>

@@ -1,5 +1,4 @@
 import {
-  checkApiKey,
   findUserIdByProviderId,
   findLocalUserByEmailPassword,
   findUserById,
@@ -7,11 +6,11 @@ import {
   getUserByUsername,
   setLastLoginNow,
 } from "#models/auth/index.js";
-import { GOOGLE_OAUTH_CONFIG } from "./config.js";
+import { GOOGLE_OAUTH_CONFIG, MICROSOFT_OAUTH_CONFIG } from "./config.js";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
-import { Strategy as BearerStrategy } from "passport-http-bearer";
+import { Strategy as MicrosoftStrategy } from "passport-microsoft";
 import {
   MAX_EMAIL_LENGTH,
   MAX_FIRST_NAME_LENGTH,
@@ -20,7 +19,6 @@ import {
 } from "../../constants.js";
 
 passport.use(
-  // TODO LOOK INTO MORE checkIfProviderIdExistsInUsers()
   new GoogleStrategy(GOOGLE_OAUTH_CONFIG, async function (
     accessToken,
     refreshToken,
@@ -31,7 +29,7 @@ passport.use(
     // THESE VALUES WILL ONLY BE USED IF THE USER IS NOT ALREADY REGISTERED
     let username = profile?.displayName?.slice(0, MAX_USERNAME_LENGTH);
     const pfp_url = profile?._json?.picture ?? null;
-    const email = profile?._json.email?.slice(0, MAX_EMAIL_LENGTH);
+    const email = profile?._json.email;
     const first_name =
       profile?.name?.givenName?.slice(0, MAX_FIRST_NAME_LENGTH) ?? null;
     const last_name =
@@ -87,6 +85,74 @@ passport.use(
 );
 
 passport.use(
+  new MicrosoftStrategy(MICROSOFT_OAUTH_CONFIG, async function (
+    accessToken,
+    refreshToken,
+    profile,
+    done
+  ) {
+    const microsoft_id = profile.id;
+    // THESE VALUES WILL ONLY BE USED IF THE USER IS NOT ALREADY REGISTERED
+    let username = profile?.displayName?.slice(0, MAX_USERNAME_LENGTH);
+    const pfp_url = profile?._json?.picture ?? null;
+    const email = profile?._json.userPrincipalName;
+    const first_name =
+      profile?.name?.givenName?.slice(0, MAX_FIRST_NAME_LENGTH) ?? null;
+    const last_name =
+      profile?.name?.familyName?.slice(0, MAX_LAST_NAME_LENGTH) ?? null;
+    //
+    let curId;
+    try {
+      if (
+        // user exists alr
+        (curId = await findUserIdByProviderId("microsoft", microsoft_id)) !==
+        false
+      ) {
+        const user = await findUserById(curId);
+        dlog("LoggedIn user:", user); //dlog cannot take params yet
+        return done(null, user);
+      } else {
+        // what if google username same as other user
+        const doesUserAlrExistWithThisUsername = await getUserByUsername(
+          username
+        );
+        if (doesUserAlrExistWithThisUsername) {
+          // if this somehow generates another user with the same username, then just have it fail bro so fair
+          username = `${username.slice(0, 20)}${Math.floor(
+            Math.random() * 10000
+          )}`;
+        }
+        // user not registered create a user.
+        await OAuthRegister(
+          first_name,
+          last_name,
+          username,
+          email,
+          pfp_url,
+          "microsoft",
+          microsoft_id
+        );
+        if (
+          (curId = await findUserIdByProviderId("microsoft", microsoft_id)) !==
+          false
+        ) {
+          const user = await findUserById(curId);
+          //dlog("Registered user:", user);
+          return done(null, user);
+        }
+      }
+      return done("Failed to microsoft login/register", false, {
+        message: "Failed to microsoft login/register",
+      });
+    } catch (err) {
+      return done(err, false, {
+        message: "Failed to microsoft login/register",
+      });
+    }
+  })
+);
+
+passport.use(
   new LocalStrategy(
     {
       usernameField: "email",
@@ -105,23 +171,6 @@ passport.use(
       return done(null, user);
     }
   )
-);
-
-passport.use(
-  new BearerStrategy(async function (token, done) {
-    try {
-      const result = await checkApiKey(token);
-
-      if (!result) {
-        return done(null, false, { message: "Invalid API key" });
-      }
-
-      const user = { id: result.id };
-      return done(null, user);
-    } catch (err) {
-      return done(err);
-    }
-  })
 );
 
 passport.serializeUser(function (user, done) {

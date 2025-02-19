@@ -101,7 +101,7 @@ router.post("/signout", function (req, res) {
   });
 });
 
-/** GOOGLE */
+/** OAUTH */
 /** /api/auth/google */
 router.get(
   "/google",
@@ -116,7 +116,25 @@ router.get(
 router.get(
   "/google/callback",
   passport.authenticate("google"),
-  async function (req, res) {
+  function (req, res) {
+    res.redirect(process.env.FRONTEND_URL);
+  }
+);
+
+router.get(
+  "/microsoft",
+
+  passport.authenticate("microsoft", {
+    display: "popup",
+    scope: ["user.read"],
+    failureFlash: true,
+  })
+);
+
+router.get(
+  "/microsoft/callback",
+  passport.authenticate("microsoft"),
+  function (req, res) {
     res.redirect(process.env.FRONTEND_URL);
   }
 );

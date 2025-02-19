@@ -69,6 +69,12 @@ export const GOOGLE_OAUTH_CONFIG = {
   callbackURL: `${secrets.BACKEND_URL}/api/auth/google/callback`,
 };
 
+export const MICROSOFT_OAUTH_CONFIG = {
+  clientID: secrets.MICROSOFT_CLIENT_ID,
+  clientSecret: secrets.MICROSOFT_CLIENT_SECRET,
+  callbackURL: `${secrets.BACKEND_URL}/api/auth/microsoft/callback`,
+};
+
 export const MATHPIX_API_INFO = {
   MATHPIX_API_KEY: secrets.MATHPIX_API_KEY,
   MATHPIX_APP_ID: secrets.MATHPIX_APP_ID,
