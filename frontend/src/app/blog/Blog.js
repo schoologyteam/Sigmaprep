@@ -36,6 +36,23 @@ export default class Blog {
     this.icon = icon;
     this.tags = tags;
   }
+
+  /**
+   * Alternative constructor to create a Blog instance from an object
+   * @param {Object} blogData
+   */
+  static fromObject(blogData) {
+    return new Blog(
+      blogData.title,
+      blogData.pub_date,
+      blogData.desc,
+      blogData.read_time,
+      blogData.by,
+      blogData.html,
+      blogData.icon,
+      blogData.tags,
+    );
+  }
   getLink() {
     return this.title.toLowerCase().replaceAll(' ', '-');
   }
