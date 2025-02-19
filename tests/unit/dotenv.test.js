@@ -12,6 +12,8 @@ test("test dotenv config has all needed values", function () {
   expect(secrets.NODE_ENV).toBeTruthy();
   expect(secrets.GOOGLE_CLIENT_ID).toBeTruthy();
   expect(secrets.GOOGLE_CLIENT_SECRET).toBeTruthy();
+  expect(secrets.MICROSOFT_CLIENT_ID).toBeTruthy();
+  expect(secrets.MICROSOFT_CLIENT_SECRET).toBeTruthy();
   expect(secrets.FRONTEND_URL).toBeTruthy();
   expect(secrets.BACKEND_URL).toBeTruthy();
   expect(secrets.OPENAI_API_KEY).toBeTruthy();
