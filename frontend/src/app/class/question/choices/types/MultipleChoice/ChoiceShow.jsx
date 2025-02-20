@@ -106,7 +106,7 @@ export default function ChoiceShow({
               right: '10px',
               top: '50%',
               transform: 'translateY(-50%)',
-              zIndex: 4,
+              zIndex: 0,
             }}
             onClick={(e) => {
               e.stopPropagation();

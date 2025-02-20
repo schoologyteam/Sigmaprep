@@ -36,7 +36,7 @@ export default function ChatBot() {
   }, []);
   function removeCurrentlyWorkingOn(message) {
     const tmp = message;
-    return tmp.replace(/currently-working-on:".*?"/g, '');
+    return tmp.replace(/---currently-working-on:".*?"---/g, '');
   }
 
   const scrollToBottom = () => {
@@ -54,7 +54,7 @@ export default function ChatBot() {
     if (inputValue.trim()) {
       dispatch(
         sendAiMessage(
-          `${currentQuestion?.question ? `currently-working-on:"${currentQuestion?.question}"` : ''}${inputValue}`,
+          `${currentQuestion?.question ? `---currently-working-on:"${currentQuestion?.question}"---` : ''}${inputValue}`,
           files,
           () => setTimeout(() => scrollToBottom(), 100),
         ),

@@ -58,6 +58,9 @@ export default function QuestionPage() {
   }, [showAIQuestions, questions]);
   useEffect(() => {
     setLocalShowAIQuestions(showAIQuestions);
+    if (questions?.length === 0 && showAIQuestions === false) {
+      setShowAIQuestions(true);
+    }
   }, [showAIQuestions]);
   ///
 
