@@ -20,7 +20,9 @@ export function errorHandler(err, req, res, next) {
     });
     // If called directly without proper Express context, throw
     if (!req && !res) {
-      throw new Error("Request or response not found in errorHandler");
+      throw new Error(
+        "Request or response not found in errorHandler, developer error, normal people u should not be seeing this"
+      );
     }
   }
 
@@ -36,7 +38,7 @@ export function errorHandler(err, req, res, next) {
   if (err instanceof ApiError) {
     return res.status(err.statusCode).json({
       status: "error",
-      errorCode: err.errorCode,
+      errorCode: err?.errorCode || INTERNAL_SERVER_ERROR,
       message: err.message, // custom error message ONLY FROM HERE DO NOT SEND ERROR FROM SERVER HERE
       details: err.details,
       ...(secrets.NODE_ENV === "local" && { stack: err.stack }),

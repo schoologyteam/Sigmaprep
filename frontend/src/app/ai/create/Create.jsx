@@ -106,6 +106,7 @@ export default function CreatePage() {
                   </Message>
                   <Form>
                     <Form.Field
+                      id={'select-class-to-use-ai-create'}
                       search
                       control={Dropdown}
                       label='Select a Class'

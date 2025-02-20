@@ -1,6 +1,6 @@
 import { show401Msg } from '@components/401/401Slice.js';
 import axios from './axios.js';
-import { hideFlashMessage, showFlashMessage } from '@components/flashmessage/flashMessageSlice.js';
+import { toast } from 'react-toastify';
 import { startLoading, stopLoading } from '@app/store/loadingSlice.js';
 import { signOut } from '@app/auth/login/loginSlice.js';
 import { updateFetchHistory } from '@app/layout/navbar/navbarSlice';
@@ -19,16 +19,16 @@ function handleApiError(error, dispatch, customMSG) {
       const errorMessage = `Rate limit exceeded. Please try again ${
         error.response?.headers?.['retry-after'] ? 'in ' + error.response?.headers?.['retry-after'] + ' seconds' : 'later'
       }`;
-      dispatch(showFlashMessage(errorMessage, true));
+      toast.error(errorMessage, { autoClose: false });
       return errorMessage;
     }
 
     default: {
       // all others can just be shown to the user.
-      const errorMessage = `${customMSG || ''} ${errorResponse?.message || ''} ${
+      const errorMessage = `${customMSG || ''}\nServer Msg: ${errorResponse?.message || ''} ${
         !customMSG && !errorResponse?.message ? 'An Unexpected Error has occured.' : ''
       }`;
-      dispatch(showFlashMessage(errorMessage, true));
+      toast.error(errorMessage, { autoClose: false });
       return errorMessage;
     }
   }
@@ -78,7 +78,7 @@ export function standardApiCall(method, route, data = null, resultAction, option
       } else if (method === 'get' || method === 'delete') {
         result = await axios[method.toLowerCase()](route, options?.axiosConfig);
       } else {
-        dispatch(showFlashMessage('axios method not found, this is a developer error. email support for help', 'err'));
+        console.error('standardApiCall: method is not valid', method);
         return;
       }
       if (Array.isArray(resultAction)) {
@@ -87,10 +87,8 @@ export function standardApiCall(method, route, data = null, resultAction, option
         }
       } else if (resultAction) dispatch({ type: resultAction, payload: result.data });
 
-      dispatch(hideFlashMessage());
-
       if (options?.noticeOfSuccess) {
-        dispatch(showFlashMessage(options.noticeOfSuccess, null));
+        toast.success(options.noticeOfSuccess);
       }
       dispatch(stopLoading(options?.loadingComponent));
       return result.data;

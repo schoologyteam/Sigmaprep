@@ -37,7 +37,7 @@ export default function ClassCardCTA() {
       >
         <Card.Content>
           <Card.Header style={{ marginTop: '1em' }}>Don't See a Class?</Card.Header>
-          <Card.Meta>Create your own and start teaching today!</Card.Meta>
+          <Card.Meta>Help everyone and add it now!</Card.Meta>
 
           <Icon
             name='plus circle'

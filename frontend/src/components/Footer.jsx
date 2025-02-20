@@ -83,8 +83,8 @@ export default function Footer() {
               <List.Item as={Link} to='/privacy' rel='noopener noreferrer'>
                 Privacy Policy
               </List.Item>
-              <List.Item as='a' href='mailto:quackprep@gmail.com'>
-                quackprep@gmail.com
+              <List.Item as='a' href='mailto:maddoxpublic@gmail.com'>
+                maddoxpublic@gmail.com
               </List.Item>
             </List>
             <p style={{ marginTop: '1em' }}>© {currentYear} QuackPrep. All rights reserved.</p>

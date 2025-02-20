@@ -22,6 +22,5 @@ test("test", async ({ page }) => {
     .locator("#question_377_segment")
     .getByRole("button", { name: "Submit" })
     .click();
-  await page.getByText("An Error Has Occurred😔").click();
   await page.getByText("Inappropriate").click();
 });

@@ -13,9 +13,9 @@ test("check if auto create class when no classes found works, given a new accoun
   await page.getByText("Please select a class from").click();
   await page.getByText("No Class Selected").click();
   await page.getByText("Please select a class from").click();
-  await page.getByRole("alert").click();
+  await page.locator("#select-class-to-use-ai-create").click();
   await page
-    .getByRole("option", { name: "test69696969696999's Study" })
+    .getByRole("option", { name: `${TEST_ACCOUNT_USER}'s Study` })
     .click();
   await page.getByRole("heading", { name: "Upload Past Exams" }).click();
 });
@@ -29,7 +29,7 @@ test("given a file and being logged in test that a user with a class can use the
   await page.goto("http://localhost:3001/");
   await login(page);
   await page.getByRole("link", { name: "AI Exam Parser" }).click();
-  await page.getByRole("alert").click();
+  await page.locator("#select-class-to-use-ai-create").click();
   await page
     .getByRole("option", { name: `${TEST_ACCOUNT_USER}'s Study Content` })
     .click();

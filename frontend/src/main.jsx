@@ -4,13 +4,13 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import store from '@app/store/store.js';
 
-import FlashMessage from '@components/flashmessage/FlashMessage.jsx';
 import AppRouter from '@app/AppRouter';
+import { ToastContainer } from 'react-toastify';
 
 export default function Main() {
   return (
     <Provider store={store}>
-      <FlashMessage />
+      <ToastContainer />
       <AppRouter />
     </Provider>
   );

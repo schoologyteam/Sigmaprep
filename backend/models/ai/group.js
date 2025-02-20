@@ -18,7 +18,7 @@ import {
   QUACK_CREATE_GROUP_ASS_ID,
 } from "../../../constants.js";
 import { FILE_SIZE_EXCEEDED } from "../../../error_codes.js";
-import { BadRequestError } from "#utils/ApiError.js";
+import ApiError, { BadRequestError } from "#utils/ApiError.js";
 import { sendEmailToUserByUserId } from "#models/account/index.js";
 import { getSchoolByClassId } from "#models/class/index.js";
 import { myS3Client } from "#config/config.js";
@@ -222,6 +222,7 @@ export async function etlFilesIntoGroup(files, class_id, user_id, user_prompt) {
       await deleteGroupById(user_id, group.id);
       dlog(`successfully cascade deleted group_id: ${group.id}`);
     }
+    console.error(error);
 
     throw error; // Let the error handler middleware handle it
   }

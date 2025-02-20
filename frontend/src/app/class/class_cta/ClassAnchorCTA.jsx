@@ -1,6 +1,6 @@
 import { Segment, Icon, Header, Accordion } from 'semantic-ui-react';
 import { useDispatch } from 'react-redux';
-import { changeNavbarPage, getStartedNow } from '@app/layout/navbar/navbarSlice';
+import { getStartedNow } from '@app/layout/navbar/navbarSlice';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 export default function ClassAnchorCTA() {
@@ -17,7 +17,7 @@ export default function ClassAnchorCTA() {
           </Header>
         </Accordion.Title>
         <Accordion.Content active={isActive}>
-          <Header.Subheader style={{ marginBottom: '1.5em' }}>Create your own and start teaching today!</Header.Subheader>
+          <Header.Subheader style={{ marginBottom: '1.5em' }}>Help everyone and add it now!</Header.Subheader>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <Icon
               name='plus circle'

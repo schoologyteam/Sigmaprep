@@ -3,7 +3,6 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import loadingReducer from './loadingSlice';
 import chatbotReducer from '@app/chatbot/chatbotSlice';
 
-import flashReducer from '@components/flashmessage/flashMessageSlice';
 import homeReducer from '../home/homeSlice';
 import loginReducer from '../auth/login/loginSlice';
 import navbarReducer from '@app/layout/navbar/navbarSlice';
@@ -38,7 +37,7 @@ const app = combineReducers({
 });
 const auth = combineReducers({ user: loginReducer });
 const store = configureStore({
-  reducer: { flashMessage: flashReducer, show401: reducer401, loading: loadingReducer, app, auth },
+  reducer: { show401: reducer401, loading: loadingReducer, app, auth },
   devTools: import.meta.env.MODE === 'development' ? true : false, // Disable in production
 });
 

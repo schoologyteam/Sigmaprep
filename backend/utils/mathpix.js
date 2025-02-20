@@ -6,6 +6,7 @@ import {
   MATHPIX_API_PDF_GET_RESULT_RETRIES,
   MATHPIX_API_PDF_GET_RESULT_SLEEP_TIME_MS,
 } from "../../constants.js";
+import ApiError from "./ApiError.js";
 
 /**
  * Keeps retrying until conversion is completed. if it retries more than 5 times, it will throw an error
@@ -83,7 +84,7 @@ export async function postPDFToMathpix(formData) {
     }
   );
   if (!result.data.pdf_id) {
-    throw new Error("failed to parse pdf");
+    throw new ApiError("failed to parse pdf", 500);
   }
   return result.data.pdf_id;
 }
@@ -135,7 +136,7 @@ export async function postImageAndRecieveText(file) {
 
     if (!result.data?.text) {
       dlog(result.data);
-      throw new Error("failed to get text from image, mathpix error.");
+      throw new ApiError("failed to get text from image, mathpix error.", 500);
     }
     dlog(`successfully got text from image with status ${result.status}`);
     return result.data?.text;
