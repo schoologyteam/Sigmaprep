@@ -13,17 +13,17 @@ export default function QuestionPostMain({ questionId }) {
   // Get the raw posts from Redux. (Adjust the selector if needed.)
   const rawPosts = useSelector(selectQuestionPosts(questionId));
 
+  // Fetch posts if none exist for the current questionId.
+  useEffect(() => {
+    if (questionId && (!rawPosts || rawPosts.length === 0)) {
+      dispatch(getQuestionPostsByQuestionId(questionId)); // if we have no posts get some, this would "get" like a million times but my (api.js get only once) code saves me
+    }
+  }, [dispatch, questionId, rawPosts]);
+
   // Build a nested structure of posts (with children attached) using useMemo to avoid unnecessary recomputation.
   const questionPosts = useMemo(() => {
     return rawPosts ? forAllParentsCallAddChildren(structuredClone(rawPosts), 'post_id') : [];
   }, [rawPosts]);
-
-  // Fetch posts if none exist for the current questionId.
-  useEffect(() => {
-    if (questionId && (!rawPosts || rawPosts.length === 0)) {
-      dispatch(getQuestionPostsByQuestionId(questionId));
-    }
-  }, [dispatch, questionId, rawPosts]);
 
   /**
    * Recursively renders a comment and its nested replies.
