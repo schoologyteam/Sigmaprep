@@ -11,7 +11,8 @@ import TypingLoader from './TypingLoader/TypingLoader';
 import './chatbot.css';
 import { clearChat, selectMessages, sendAiMessage } from './chatbotSlice';
 import { useDispatch } from 'react-redux';
-import MarkdownRenderer from '@components/MarkdownRenderer';
+import Messages from './Messages';
+import { scrollToBottom } from '@utils/helperFuncs';
 export default function ChatBot() {
   const [files, setFiles] = useState([]);
 
@@ -22,25 +23,19 @@ export default function ChatBot() {
   const [includeQuestionContext, setIncludeQuestionContext] = useState(true);
 
   const currentQuestion = useSelector(selectArrayOfStateById('app.question.questions.questions', 'id', questionId))?.[0];
+  // todo abstract to getcontextForChatBot
   const dispatch = useDispatch();
 
   const [inputValue, setInputValue] = useState('');
   const messagesEndRef = useRef(null);
 
-  useEffect(() => {
-    scrollToBottom();
-  }, []);
-  function removeCurrentlyWorkingOn(message) {
-    const tmp = message;
-    return tmp.replace(/---currently-working-on:".*?"---/g, '');
+  function scrollToEndOfChats() {
+    scrollToBottom(messagesEndRef.current.closest('.messages-wrapper'));
   }
 
-  const scrollToBottom = () => {
-    const messagesWrapper = messagesEndRef.current?.closest('.messages-wrapper');
-    if (messagesWrapper) {
-      messagesWrapper.scrollTop = messagesWrapper.scrollHeight;
-    }
-  };
+  useEffect(() => {
+    scrollToEndOfChats();
+  }, []);
 
   const handleSubmit = () => {
     if (files.length > MAX_FILES_UPLOAD) {
@@ -54,12 +49,12 @@ export default function ChatBot() {
             currentQuestion?.question && includeQuestionContext ? `---currently-working-on:"${currentQuestion?.question}"---` : ''
           }${inputValue}`,
           files,
-          () => setTimeout(() => scrollToBottom(), 100),
+          () => setTimeout(() => scrollToEndOfChats(), 100),
         ),
       );
       setInputValue('');
       setFiles([]);
-      setTimeout(() => scrollToBottom(), 100);
+      setTimeout(() => scrollToEndOfChats(), 100);
     }
   };
 
@@ -96,34 +91,7 @@ export default function ChatBot() {
             </div>
           </div>
         }
-        {messages &&
-          messages.map((message, messageIndex) => {
-            if (Array.isArray(message.content)) {
-              return (
-                <div
-                  key={messageIndex}
-                  className={`message-bubble ${message.role === 'user' ? 'user-message' : 'assistant-message'}`}
-                >
-                  {message.content.map((content, contentIndex) => (
-                    <div key={contentIndex} className='message-text'>
-                      {content.type === 'text' ? removeCurrentlyWorkingOn(content.text) : <Image src={content.image_url.url} />}
-                    </div>
-                  ))}
-                </div>
-              );
-            } else {
-              return (
-                <div
-                  key={messageIndex}
-                  className={`message-bubble ${message.role === 'user' ? 'user-message' : 'assistant-message'}`}
-                >
-                  <div className='message-text'>
-                    <MarkdownRenderer render={removeCurrentlyWorkingOn(message.content)} />
-                  </div>
-                </div>
-              );
-            }
-          })}
+        {<Messages messages={messages} />}
 
         {loading && <TypingLoader />}
 

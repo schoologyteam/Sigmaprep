@@ -219,3 +219,9 @@ export function forAllParentsCallAddChildren(items, parent_id_name) {
   }
   return items;
 }
+
+export function scrollToBottom(toScrollTo) {
+  if (toScrollTo) {
+    toScrollTo.scrollTop = toScrollTo.scrollHeight;
+  }
+}
