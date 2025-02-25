@@ -2,7 +2,6 @@ import { useDispatch } from 'react-redux';
 import { Container, Header, Button, Icon, Segment, Grid } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
 import { changeNavbarPage } from '@app/layout/navbar/navbarSlice';
-import duckBlissImage from '/img/home/duck_bliss.webp';
 import './home.css';
 import Explainer from './Explainer';
 import HomeGraph from './Graph';
@@ -25,7 +24,7 @@ export default function Home() {
         style={{
           marginTop: 0,
           minHeight: '90vh',
-          padding: '8em 0',
+          padding: '5em 0',
           position: 'relative',
           backgroundColor: 'white',
         }}
@@ -44,7 +43,11 @@ export default function Home() {
                     color: '#2d3436',
                   }}
                 >
-                  Master Your Exams with Smart AI Learning
+                  The{' '}
+                  <a rel='noopener noreferrer' target='_blank' href='https://github.com/openexams/quackprep'>
+                    <i>Open Source</i>
+                  </a>{' '}
+                  Exam Studying Platform
                 </Header>
                 <p
                   style={{
