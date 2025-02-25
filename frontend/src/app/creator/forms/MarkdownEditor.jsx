@@ -25,7 +25,6 @@ export default function MarkdownEditor({ label, onChange, value, placeholder, re
         content={editingMD ? 'Click outside to render md' : 'Click to edit'}
         trigger={
           <Segment
-            ref={editorRef}
             onClick={() => {
               setEditingMD(true);
             }}
@@ -37,6 +36,7 @@ export default function MarkdownEditor({ label, onChange, value, placeholder, re
               </div>
             ) : (
               <Form.TextArea
+                ref={editorRef}
                 label={label}
                 required={required}
                 value={value}

@@ -23,8 +23,8 @@ export default function MultipleChoice({ choices, selectedQuestion }) {
   }, [selectedQuestion]);
 
   return (
-    <Segment basic>
-      <List>
+    <Segment basic size='small'>
+      <List size='small'>
         {choices.map(
           (
             choice,

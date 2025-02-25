@@ -14,7 +14,9 @@ export default function ChoiceRouter({ selectedQuestion }) {
   const edit = useSelector(selectCanAndIsEdit()); // TODO CHECK IF USER IS ALLOWED TO EDIT!!!
   const choices = useSelector(selectBINARYArrayOfStateById('app.choices.choices', 'question_id', parseInt(selectedQuestion?.id)));
   const loading = useSelector(selectLoadingState).loadingComps?.ChoiceRouter; // todo fix
-
+  if (!selectedQuestion.id) {
+    return <NoItemsFound />;
+  }
   // maybe check if choices are all the same what if one choice was mcq and other was select (should not be possible)
   let component = null;
   if (!loading) {
@@ -33,6 +35,7 @@ export default function ChoiceRouter({ selectedQuestion }) {
   }
   return (
     <Segment
+      size='small'
       id={`question_${selectedQuestion.id}_segment`}
       style={{ maxHeight: '35rem', minHeight: '35rem', overflowY: 'auto' }}
       basic

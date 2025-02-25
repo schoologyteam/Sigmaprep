@@ -45,6 +45,7 @@ export default function ChoiceShow({
     <List.Item className='answer-list-item' style={{ position: 'relative', overflow: 'hidden' }}>
       <div className='answer-wrapper' style={{ position: 'relative' }}>
         <Button
+          size='small'
           disabled={disabled}
           className={getButtonClass()}
           onClick={handleAnswerClick}
@@ -98,7 +99,7 @@ export default function ChoiceShow({
 
         {!showAnswers && (
           <Button
-            icon={<Icon color='black' name='ban' />}
+            icon={<Icon color='black' name='strikethrough' />}
             size='large'
             className='disable-toggle extra'
             style={{
@@ -106,9 +107,10 @@ export default function ChoiceShow({
               right: '10px',
               top: '50%',
               transform: 'translateY(-50%)',
-              zIndex: 0,
+              zIndex: 50,
             }}
             onClick={(e) => {
+              e.preventDefault();
               e.stopPropagation();
               setDisabled(!disabled);
             }}

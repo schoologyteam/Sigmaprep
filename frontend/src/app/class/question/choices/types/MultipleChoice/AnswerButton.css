@@ -1,6 +1,6 @@
 /* AnswerButton.css */
 .answer-list-item {
-  margin-bottom: 1rem !important;
+  /* margin-bottom: 1rem !important; buttons closer without this look better to me */
 }
 
 .answer-wrapper {
