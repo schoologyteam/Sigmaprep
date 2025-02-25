@@ -30,7 +30,9 @@ export default function ChatBot() {
   const messagesEndRef = useRef(null);
 
   function scrollToEndOfChats() {
-    scrollToBottom(messagesEndRef.current.closest('.messages-wrapper'));
+    if (messagesEndRef.current) {
+      scrollToBottom(messagesEndRef.current.closest('.messages-wrapper'));
+    }
   }
 
   useEffect(() => {
