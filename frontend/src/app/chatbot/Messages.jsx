@@ -3,8 +3,8 @@ import { Image } from 'semantic-ui-react';
 // messages is an array of messages which include who sent it and the text.
 export default function Messages({ messages }) {
   function removeCurrentlyWorkingOn(message) {
-    const tmp = message;
-    return tmp.replace(/---currently-working-on:".*?"---/g, '');
+    const tmp = message; //  https://regexr.com/
+    return tmp.replace(/---currently-working-on:"[\s\S]*?"---/g, '');
   }
   return (
     <>
