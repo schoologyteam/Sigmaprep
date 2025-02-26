@@ -102,10 +102,11 @@ export default function ChoiceShow({
 
         {!showAnswers && (
           <Button
-            icon={<Icon color='black' name='strikethrough' />}
+            icon={<Icon style={{ opacity: 0.4 }} color='black' name='strikethrough' />}
             size='large'
             className='disable-toggle extra'
             style={{
+              opacity: 0.7,
               position: 'absolute',
               right: '10px',
               top: '50%',
