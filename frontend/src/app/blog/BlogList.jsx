@@ -14,9 +14,9 @@ export default function BlogMain() {
 
       <Grid columns={2} stackable centered padded>
         {blogs.map((blog) => (
-          <Grid.Column style={{ maxWidth: '25em', maxHeight: '25em', marginTop: '.8em' }} key={blog.getLink()}>
+          <Grid.Column style={{ maxWidth: '25em', maxHeight: '30em', marginTop: '.8em' }} key={blog.getLink()}>
             <Card
-              style={{ width: '25em', height: '25em' }}
+              style={{ width: '25em', height: '30em' }}
               as='a'
               onClick={() => changeNavbarPage(navigate, `/blog/${blog.getLink()}`, { scrollToTop: true })}
               size='small'
