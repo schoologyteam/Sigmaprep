@@ -1,11 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Segment, TextArea, Button, Icon, Image, Checkbox, Grid } from 'semantic-ui-react';
-import { selectArrayOfStateById } from 'maddox-js-funcs';
-import { selectNavbarState } from '@app/layout/navbar/navbarSlice';
+import { Segment, TextArea, Button, Icon, Checkbox, Grid } from 'semantic-ui-react';
 import { selectUser } from '../auth/authSlice';
 import LoginRequired from '../auth/LoginRequired';
-import { MAX_FILES_UPLOAD } from '../../../../constants';
 import { selectLoadingState } from '@app/store/loadingSlice';
 import TypingLoader from './TypingLoader/TypingLoader';
 import './chatbot.css';
@@ -13,16 +10,16 @@ import { clearChat, selectMessages, sendAiMessage } from './chatbotSlice';
 import { useDispatch } from 'react-redux';
 import Messages from './Messages';
 import { scrollToBottom } from '@utils/helperFuncs';
+import { selectCurrentQuestion } from '@app/class/question/questionSlice';
+import { selectCurrentChoices, stringifyChoices } from '@app/class/question/choices/choicesSlice';
 export default function ChatBot() {
-  const [files, setFiles] = useState([]);
-
   const messages = useSelector(selectMessages);
   const loading = useSelector(selectLoadingState).loadingComps?.ChatBot;
   const user_id = useSelector(selectUser).user?.id;
-  const { questionId } = useSelector(selectNavbarState).navbar;
   const [includeQuestionContext, setIncludeQuestionContext] = useState(true);
 
-  const currentQuestion = useSelector(selectArrayOfStateById('app.question.questions.questions', 'id', questionId))?.[0];
+  const currentQuestion = useSelector(selectCurrentQuestion);
+  const currentChoices = useSelector(selectCurrentChoices);
   // todo abstract to getcontextForChatBot
   const dispatch = useDispatch();
 
@@ -40,22 +37,20 @@ export default function ChatBot() {
   }, []);
 
   const handleSubmit = () => {
-    if (files.length > MAX_FILES_UPLOAD) {
-      window.alert(`Max files upload exceeded: ${MAX_FILES_UPLOAD}`);
-      throw new Error('Max files upload exceeded');
-    }
     if (inputValue.trim()) {
       dispatch(
         sendAiMessage(
           `${
-            currentQuestion?.question && includeQuestionContext ? `---currently-working-on:"${currentQuestion?.question}"---` : ''
-          }${inputValue}`,
-          files,
+            currentQuestion?.question && includeQuestionContext
+              ? `---currently-working-on:"${currentQuestion?.question}. ${
+                  currentChoices?.[0].type === 'mcq' ? `my current choices are: ${stringifyChoices(currentChoices)}` : ''
+                }"---`
+              : ''
+          }\n${inputValue}`,
           () => setTimeout(() => scrollToEndOfChats(), 100),
         ),
       );
       setInputValue('');
-      setFiles([]);
       setTimeout(() => scrollToEndOfChats(), 100);
     }
   };

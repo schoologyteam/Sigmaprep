@@ -51,7 +51,7 @@ function handleApiError(error, dispatch, customMSG) {
  * @param {Object} [options.fetchAction] - if given, will dispatch this action on call
  * @returns {Function} dispatches an action to the reducer with a action.payload of the data
  */
-export function standardApiCall(method, route, data = null, resultAction, options) {
+export function standardApiCall(method, route, data = null, resultAction, options = {}) {
   return async function (dispatch, getState) {
     if (!dispatch || !getState) {
       console.error('standardApiCall: dispatch or getState is not defined');

@@ -130,7 +130,20 @@ export function doesQuestionHaveCurrentChoice(currentChoices, question_id) {
   }
 }
 
-export const selectCurrentChoicesState = createSelector(
-  (state) => state,
-  (state) => state.app.choices.currentChoices,
-);
+export const selectCurrentChoicesState = (state) => state.app.choices.currentChoices;
+
+export function selectCurrentChoices(state) {
+  const choicesState = state.app.choices.choices;
+  const question_id = state.app.navbar.questionId;
+  return choicesState.filter((choice) => choice.question_id === question_id);
+}
+
+export function stringifyChoices(choices) {
+  if (choices?.length > 0) {
+    return choices
+      .map((choice) => {
+        return `choice: ${choice.answer}`;
+      })
+      .join(',\n ');
+  }
+}

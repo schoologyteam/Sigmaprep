@@ -36,6 +36,9 @@ export default function ChoiceShow({
     if (!showAnswers) {
       setShowAnswers(true);
       dispatch(upsertCurrentChoiceAndPostAnswer(id, selectedQuestionId, null));
+      if (is_correct) {
+        console.log('correct!');
+      }
     }
   };
 
