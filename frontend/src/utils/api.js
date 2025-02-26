@@ -94,7 +94,7 @@ export function standardApiCall(method, route, data = null, resultAction, option
       return result.data;
     } catch (error) {
       console.error(error);
-      const errorMessage = handleApiError(error, dispatch, options.errorMsg);
+      const errorMessage = handleApiError(error, dispatch, options?.errorMsg);
       console.error(errorMessage);
 
       dispatch(stopLoading(options?.loadingComponent));
