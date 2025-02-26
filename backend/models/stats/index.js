@@ -3,7 +3,7 @@ import sqlExe from "#db/dbFunctions.js";
 export async function getWhichUsersAnsweredMostQuestions() {
   return await sqlExe.executeCommand(
     `SELECT u.id, u.username, u.is_creator, COUNT(*) as questions_answered, u.icon FROM answers_transactional
-     a JOIN users u ON u.id = a.created_by JOIN choices c ON a.choice_id = c.id AND c.deleted = 0
+     a JOIN users u ON u.id = a.created_by JOIN choices c ON a.choice_id = c.id
        GROUP BY a.created_by ORDER BY questions_answered DESC LIMIT 5; 
     `
   ); //pull in top 5

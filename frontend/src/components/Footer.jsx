@@ -36,7 +36,7 @@ export default function Footer() {
                 <List.Item as='a' href='https://discord.com/invite/APy5379qT8' target='_blank' rel='noopener noreferrer'>
                   Feature Request
                 </List.Item>
-                <List.Item as='a' href='https://discord.com/invite/APy5379qT8' target='_blank' rel='noopener noreferrer'>
+                <List.Item as='a' href='https://github.com/openexams/quackprep/issues' target='_blank' rel='noopener noreferrer'>
                   Bug Report
                 </List.Item>
               </List>
