@@ -9,11 +9,20 @@ import NoItemsFound from '@components/NoItemsFound';
 import ChoiceEditor from '@app/creator/forms/ChoiceEditor';
 import QuestionEditor from '@app/creator/forms/QuestionEditor';
 import { selectCanAndIsEdit } from '@app/auth/authSlice';
+import { useEffect, useRef } from 'react';
 
 export default function ChoiceRouter({ selectedQuestion }) {
   const edit = useSelector(selectCanAndIsEdit()); // TODO CHECK IF USER IS ALLOWED TO EDIT!!!
   const choices = useSelector(selectBINARYArrayOfStateById('app.choices.choices', 'question_id', parseInt(selectedQuestion?.id)));
   const loading = useSelector(selectLoadingState).loadingComps?.ChoiceRouter; // todo fix
+  const choiceRouterRef = useRef(null);
+  useEffect(() => {
+    // auto scroll to top on question change
+    if (choiceRouterRef.current && selectedQuestion?.id) {
+      choiceRouterRef.current.scrollTop = 0;
+    }
+  }, [selectedQuestion?.id]);
+
   if (!selectedQuestion.id) {
     return <NoItemsFound />;
   }
@@ -35,6 +44,7 @@ export default function ChoiceRouter({ selectedQuestion }) {
   }
   return (
     <Segment
+      ref={choiceRouterRef}
       size='small'
       id={`question_${selectedQuestion.id}_segment`}
       style={{ maxHeight: '35rem', minHeight: '35rem', overflowY: 'auto' }}
