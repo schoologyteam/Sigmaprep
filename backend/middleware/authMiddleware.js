@@ -21,6 +21,7 @@ export async function hasApiKeyAndInsert(req, token) {
     return false;
   }
 }
+// all work and no play makes maddox a dull boy
 
 export async function isAuthenticated(req, res, next) {
   if (req.user && req.isAuthenticated()) {
