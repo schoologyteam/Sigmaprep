@@ -94,7 +94,11 @@ export function selectQuestionsByGroupId() {
 export function selectCurrentQuestion(state) {
   /** @type {import("../../../../../types").Question[]} */
   const curQuestionState = state.app.question.questions.questions;
+  if (!Array.isArray(curQuestionState)) {
+    return null;
+  }
   const curQId = state.app.navbar.questionId;
+  if (!curQId) return null;
   for (let i = 0; i < curQuestionState.length; i++) {
     if (curQuestionState[i].id === curQId) {
       return curQuestionState[i];

@@ -134,7 +134,9 @@ export const selectCurrentChoicesState = (state) => state.app.choices.currentCho
 
 export function selectCurrentChoices(state) {
   const choicesState = state.app.choices.choices;
+  if (!Array.isArray(choicesState)) return null;
   const question_id = state.app.navbar.questionId;
+  if (!question_id) return null;
   return choicesState.filter((choice) => choice.question_id === question_id);
 }
 
