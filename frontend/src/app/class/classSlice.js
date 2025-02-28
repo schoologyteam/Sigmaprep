@@ -67,7 +67,6 @@ const DEFAULT_STATE = {
 export default function classReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case GET_CRUD_CLASSES:
-      console.log(action.payload);
       return {
         ...state,
         classes: countingSort(updateArrObjectsWithNewVals(state.classes, action.payload), 'school_id'),
