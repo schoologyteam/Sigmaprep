@@ -42,6 +42,7 @@ export async function selectClasses(WHERE, params) {
 }
 
 export async function getTopRatedClasses(limit) {
+  return "needs fixed";
   return await sqlExe.executeCommand(
     `SELECT cl.id, cl.name, cl.school_id, cl.description, cl.category, MIN(g.id) as group_id, min(p.id) as pdf_id, u.id as created_by, u.username as created_username, COALESCE(vc.votes,0) as upvotes
     FROM classes cl
@@ -81,9 +82,13 @@ export async function getTotalClasses() {
 
 export async function getClassesBySchoolId(school_id) {
   // where in this is alr done jst past smth in so it does not errs
-  return await selectClasses("cl.deleted = 0 AND school_id = :school_id", {
-    school_id,
-  });
+  const classes = await selectClasses(
+    "cl.deleted = 0 AND school_id = :school_id",
+    {
+      school_id,
+    }
+  );
+  return classes;
 }
 
 // school table in class
