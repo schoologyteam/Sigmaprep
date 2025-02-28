@@ -4,6 +4,7 @@ import QuestionPostInput from './QuestionPostInput';
 import { selectUser } from '@app/auth/authSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteQuestionPost } from './questionPostSlice';
+import { getDefaultIconUrl } from '../../../../../../globalFuncs';
 export default function QuestionPost({ id, post_id, username, user_id, icon, text, updated_at, children, question_id, deleted }) {
   const [editMode, setEditMode] = useState(false);
   const [replyMode, setReplyMode] = useState(false);
@@ -13,6 +14,7 @@ export default function QuestionPost({ id, post_id, username, user_id, icon, tex
     console.error('dev error, text is null but is not set deleted on local');
   }
 
+  // reset if anything changes, such as turn off edit and reply when we get back any result
   useEffect(() => {
     setEditMode(false);
     setReplyMode(false);
@@ -20,7 +22,7 @@ export default function QuestionPost({ id, post_id, username, user_id, icon, tex
 
   return (
     <Comment key={`${id}_${text}`}>
-      <Comment.Avatar src={icon} />
+      <Comment.Avatar src={icon || getDefaultIconUrl(username)} />
       <Comment.Content>
         <Comment.Author as='l'>{username}</Comment.Author>
         <Comment.Metadata>

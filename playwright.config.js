@@ -25,4 +25,5 @@ export default defineConfig({
   ],
 
   outputDir: "test-results/",
+  maxFailures: 1,
 });

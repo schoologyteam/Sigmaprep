@@ -5,6 +5,7 @@ import { Container, Header, Icon, Grid, Card, List, Image, Segment, Label, Progr
 import { getTopStreaks, getWhichUsersAnsweredMostQuestions, selectLeaderboardState } from './leaderboardSlice';
 import { selectLoadingState } from '../store/loadingSlice';
 import CreatorBadge from '@components/CreatorBadge';
+import { getDefaultIconUrl } from '../../../../globalFuncs.js';
 
 const TOP_X_AMT = 5; // Keep 5
 
@@ -37,7 +38,7 @@ const LeaderboardCard = ({ title, icon, iconColor, data, dataKey }) => (
               </div> */}
 
               {/* User Avatar */}
-              <Image size='large' avatar src={item.icon || `https://api.dicebear.com/6.x/initials/svg?seed=${item.username}`} />
+              <Image size='large' avatar src={item.icon || getDefaultIconUrl(item.username)} />
 
               {/* User Info */}
               <List.Content>

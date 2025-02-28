@@ -3,6 +3,7 @@ import { Card, Image, Icon, Button } from 'semantic-ui-react';
 import { selectUser } from '../auth/authSlice';
 import { changeNavbarPage } from '@app/layout/navbar/navbarSlice';
 import { useNavigate } from 'react-router-dom';
+import { getDefaultIconUrl } from '../../../../globalFuncs';
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ export default function Profile() {
         }}
       >
         <Image
-          src={user.icon || `https://api.dicebear.com/6.x/initials/svg?seed=${user.username}`}
+          src={user.icon || getDefaultIconUrl(user.username)}
           ui={false}
           style={{
             maxHeight: '250px',

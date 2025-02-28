@@ -7,6 +7,7 @@ import ConfirmSignoutModal from './ConfirmSignoutModal';
 import fireGif from '/img/fire_flame.gif';
 
 import { useNavigate } from 'react-router-dom';
+import { getDefaultIconUrl } from '../../../../../globalFuncs.js';
 
 export default function ProfileDropdown({ activePage, handlePageChange, hasStreak }) {
   const dispatch = useDispatch();
@@ -19,8 +20,7 @@ export default function ProfileDropdown({ activePage, handlePageChange, hasStrea
       direction='left'
       trigger={
         <span>
-          <Image as={'img'} avatar src={user.icon || `https://api.dicebear.com/6.x/initials/svg?seed=${user.username}`} />{' '}
-          {user.username}
+          <Image as={'img'} avatar src={user.icon || getDefaultIconUrl(user.username)} /> {user.username}
           {hasStreak && <Image avatar src={fireGif} />}
         </span>
       }
