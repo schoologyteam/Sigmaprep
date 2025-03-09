@@ -12,3 +12,5 @@ export function generateQuestionLike(question_id, question_text) {
     { loadingComponent: ['GenerateQuestion'], noticeOfSuccess: 'successfully generated ai question' },
   );
 }
+
+export const AI_DISCLAIMER = 'These questions are AI-generated and may contain inaccuracies. Please verify their correctness.';

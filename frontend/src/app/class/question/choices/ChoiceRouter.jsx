@@ -10,6 +10,7 @@ import ChoiceEditor from '@app/creator/forms/ChoiceEditor';
 import QuestionEditor from '@app/creator/forms/QuestionEditor';
 import { selectCanAndIsEdit } from '@app/auth/authSlice';
 import { useEffect, useRef } from 'react';
+import { AI_DISCLAIMER } from '../ai/aiQuestionSlice';
 
 export default function ChoiceRouter({ selectedQuestion }) {
   const edit = useSelector(selectCanAndIsEdit()); // TODO CHECK IF USER IS ALLOWED TO EDIT!!!
@@ -65,9 +66,9 @@ export default function ChoiceRouter({ selectedQuestion }) {
             ) : (
               <MarkdownRenderer render={selectedQuestion.question} />
             )}
-            {selectedQuestion.ai ? (
+            {selectedQuestion?.ai ? (
               <Popup
-                content='These questions are AI-generated and may contain inaccuracies. Please verify their correctness.'
+                content={AI_DISCLAIMER}
                 trigger={
                   <Label color='blue' style={{ marginLeft: '10px', cursor: 'pointer' }}>
                     AI-Generated

@@ -2,6 +2,23 @@
 import { SUCCESS } from "../../../error_codes.js";
 import sqlExe from "#db/dbFunctions.js";
 import EmailService from "#utils/EmailService.js";
+import { findUserById } from "#models/auth/index.js";
+
+export async function editProfile(
+  user_id,
+  username,
+  icon_link,
+  first_name,
+  last_name
+) {
+  await sqlExe.executeCommand(
+    `update users set username=:username, icon=:icon_link, first_name=:first_name, last_name=:last_name 
+    where id=:user_id`,
+    { user_id, username, icon_link, first_name, last_name }
+  );
+  // return updated user data to send back
+  return await findUserById(user_id);
+}
 
 export async function upsertTimeSpent(user_id) {
   return await sqlExe.executeCommand(

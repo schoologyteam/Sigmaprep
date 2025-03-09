@@ -3,6 +3,7 @@ import { List, Label, Icon, Popup } from 'semantic-ui-react';
 
 import { upsertFavoriteQuestion } from './favorite/favoriteSlice';
 import FavoriteIcon from './favorite/FavoriteIcon';
+import { AI_DISCLAIMER } from './ai/aiQuestionSlice';
 
 /**
  *
@@ -77,7 +78,7 @@ export default function QuestionCard({
               style={{ marginRight: '0.5em' }}
             />
           )}
-          {ai ? <Popup trigger={<Label size='mini' color='blue' content={'AI'} />}>AI generated question</Popup> : null}
+          {ai ? <Popup trigger={<Label size='mini' color='blue' content={'AI'} />}>{AI_DISCLAIMER}</Popup> : null}
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '1em' }}>

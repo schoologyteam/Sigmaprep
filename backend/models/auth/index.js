@@ -138,6 +138,7 @@ export async function getUserByUsername(username) {
   };
 }
 
+// good to send to client
 export async function findUserById(id) {
   const exists = await sqlExe.executeCommand(
     `SELECT u.icon, u.id,u.username,u.email,u.first_name,u.last_name,u.is_creator FROM users u WHERE id = :id`,
