@@ -18,9 +18,10 @@ export function maddoxMiddleware(req, res, next) {
   } else if (req.headers?.["x-powered-by"] === "axios") {
     next();
   } else {
-    console.error("FATAL ERROR: USER FAILED THE MADDOX TEST", req?.ip);
-    res
-      .status(500)
-      .json({ message: "all work and no play makes maddox a dull boy" });
+    next();
+    // console.error("FATAL ERROR: USER FAILED THE MADDOX TEST", req?.ip);
+    // res
+    //   .status(500)
+    //   .json({ message: "all work and no play makes maddox a dull boy" });
   }
 }
