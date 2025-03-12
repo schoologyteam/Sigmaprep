@@ -37,7 +37,7 @@ export default function QuestionPage() {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { schoolName, classId, groupId, groupName, questionId } = useSelector(selectNavbarState).navbar;
+  const { schoolName, className, classId, groupId, groupName, questionId } = useSelector(selectNavbarState).navbar;
   /**@type {import('../../../../../types.ts').Question[]} */
   let questions = useSelector(selectQuestionsByGroupId());
 
@@ -95,6 +95,9 @@ export default function QuestionPage() {
 
   return (
     <Segment basic loading={questionPageLoading}>
+      <Header as={'h3'} style={{ marginBottom: '-.2em', fontSize: '2rem', color: 'gray' }} textAlign='center'>
+        {className}
+      </Header>
       <CustomImageLoader content={'generating ai question (takes ~10s)'} active={generateQuestionLoading}>
         <Header style={{ fontSize: '2.5rem' }} textAlign='center'>
           {groupName} <ShowGroupsPdfsModal />
