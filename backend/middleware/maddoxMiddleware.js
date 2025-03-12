@@ -18,7 +18,7 @@ export function maddoxMiddleware(req, res, next) {
   } else if (req.headers?.["x-powered-by"] === "axios") {
     next();
   } else {
-    next();
+    next(); // this fixed an issue with google bots, not sure why as they click buttons which use axios which call my api with the correct header.
     // console.error("FATAL ERROR: USER FAILED THE MADDOX TEST", req?.ip);
     // res
     //   .status(500)

@@ -111,8 +111,11 @@ export async function sendOpenAiAssistantPromptAndRecieveResult(
 
     // get message from AI when completed.
     const allMessages = await openai.beta.threads.messages.list(quackThread.id);
-
-    return JSON.parse(allMessages?.data[0]?.content?.[0]?.text?.value);
+    if (allMessages?.data[0]?.content?.[0]?.text?.value) {
+      return JSON.parse(allMessages?.data[0]?.content?.[0]?.text?.value);
+    } else {
+      throw new Error("I dont think it returned a valid response");
+    }
   } catch (error) {
     console.error("failed to call openai api, rethrowing error");
     throw error;
