@@ -52,6 +52,8 @@ export default function Sentinel() {
     const urlArr = getFixedUrlArr(location.pathname);
     if (urlArr[1] === 'blog' && urlArr[2]) {
       document.title = Blog.getBlogFromLink(blogs, urlArr[2])?.getTitle() || '404 Blog - Quackprep';
+    } else if (className && schoolName) {
+      document.title = className + '  | ' + schoolName + ' - ' + 'Quackprep';
     } else if (schoolName) {
       document.title = schoolName + ' - ' + 'Quackprep';
     } else if (urlArr[1]) {
@@ -59,7 +61,7 @@ export default function Sentinel() {
     } else {
       document.title = 'QuackPrep | Past Exams | AI Study Tools';
     }
-  }, [location, schoolName]);
+  }, [location, schoolName, className]);
 
   useEffect(() => {
     userIdRef.current = user.id;
