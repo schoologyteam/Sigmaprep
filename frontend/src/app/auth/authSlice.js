@@ -2,6 +2,7 @@ import { standardApiCall } from '@utils/api';
 import { LOGIN } from './login/loginSlice';
 import { selectItemById } from 'maddox-js-funcs';
 import { ADMIN_ACCOUNT_ID } from '../../../../constants.js';
+import { createSelector } from 'reselect';
 
 export function getCurUser() {
   return standardApiCall('get', '/api/auth/verify', null, LOGIN, { loadingComponent: 'AuthPopup' });
@@ -11,7 +12,10 @@ export function getCurUser() {
  * Selector to get the user from the auth state.
  * @returns {{user: import('../../../../types').User}} An object containing the user.
  */
-export const selectUser = (state) => ({ user: state.auth.user });
+export const selectUser = createSelector(
+  (state) => state.auth.user,
+  (user) => ({ user }),
+);
 
 /**
  * if ur in a current class use this.
