@@ -9,14 +9,4 @@ export const contributors = [
       { label: 'LinkedIn', url: 'https://www.linkedin.com/in/maddox-schmidlkofer/', icon: 'linkedin', color: 'blue' },
     ],
   },
-  {
-    imgSrc:
-      'https://media.licdn.com/dms/image/v2/D5603AQH9l-dAsT1WXQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1699241824248?e=1743033600&v=beta&t=T7FaGrM_q1ogj_G6X7_BKCTkj5WDnswVCXIJrtqlb2U',
-    name: 'Hayes Bounds',
-    description: 'Think about that',
-    links: [
-      { label: 'GitHub', url: 'https://github.com/hebounds', icon: 'github', color: 'black' },
-      { label: 'LinkedIn', url: 'https://www.linkedin.com/in/hayes-bounds-441a7b210/', icon: 'linkedin', color: 'blue' },
-    ],
-  },
 ];
