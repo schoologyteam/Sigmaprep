@@ -49,17 +49,35 @@ export default function Home() {
                   </a>{' '}
                   Exam Studying Platform
                 </Header>
-                <p
-                  style={{
-                    fontSize: '1.25rem',
-                    marginBottom: '2.5rem',
-                    color: '#636e72',
-                    lineHeight: 1.6,
-                  }}
-                >
-                  Access a wide range of exams and practice questions to prepare for your exams, with personalized study material
-                  and expert AI-driven guidance.
-                </p>
+                <div>
+                  <p
+                    style={{
+                      fontSize: '1.25rem',
+
+                      color: '#636e72',
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    Access a wide range of exams and practice questions to prepare for your exams, with personalized study
+                    material and expert AI-driven guidance.
+                  </p>
+
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '2rem' }}>
+                    <a href='https://discord.com/invite/APy5379qT8'>
+                      <span style={{ fontSize: '0.875rem', color: '#636e72' }}>Join the community today</span>
+                      <img
+                        src='/icon/discord_icon.svg'
+                        alt='Discord'
+                        style={{
+                          width: '20px',
+                          height: '20px',
+                          verticalAlign: 'middle', // Adjust this value as needed
+                          transition: 'transform 0.2s ease',
+                        }}
+                      />
+                    </a>
+                  </div>
+                </div>
                 <div style={{ display: 'flex', gap: '1rem' }}>
                   <Button
                     primary
