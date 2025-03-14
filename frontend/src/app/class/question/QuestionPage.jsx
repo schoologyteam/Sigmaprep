@@ -63,7 +63,7 @@ export default function QuestionPage() {
     if (questions?.length === 0 && showAIQuestions === false) {
       setShowAIQuestions(true);
     }
-  }, [showAIQuestions, questions]);
+  }, [showAIQuestions]);
 
   useEffect(() => {
     if (
@@ -82,13 +82,14 @@ export default function QuestionPage() {
   }, [questions?.length, questionId, dispatch, navigate, questionVoteLoading, questionPageLoading]);
 
   useEffect(() => {
+    // change navbar state when selected question id changes
     if (!questionPageLoading && selectedQuestion?.id) {
       dispatch(
         changeNavbarPage(navigate, `/class/${schoolName}/${classId}/group/${groupId}/question/${parseInt(selectedQuestion.id)}`),
       );
       dispatch(updateQuestionId(parseInt(selectedQuestion.id)));
     }
-  }, [selectedQuestion?.id, questionVoteLoading, questionPageLoading, dispatch, navigate, schoolName, classId, groupId]);
+  }, [selectedQuestion?.id, questionVoteLoading, questionPageLoading]);
 
   // This custom component wrapper fixes the sizing issues by applying consistent styling
   const ActionButtonsContainer = ({ children }) => (
