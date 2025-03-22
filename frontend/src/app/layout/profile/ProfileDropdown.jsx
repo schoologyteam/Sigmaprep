@@ -39,7 +39,11 @@ export default function ProfileDropdown({ activePage, handlePageChange, hasStrea
             onClose={setConfirmOpen}
             open={confimOpen}
             onSubmit={() => {
-              window.location.href = '/'; // refresh all state. unoptimal but easy
+              // timeout is because if no timeout dispatch(signOut()); would not get ran
+              dispatch(signOut()); // make sure this goes through
+              setTimeout(() => {
+                window.location.href = '/'; // refresh all state. unoptimal but easy
+              }, 500);
             }}
           />
         ) : null}
