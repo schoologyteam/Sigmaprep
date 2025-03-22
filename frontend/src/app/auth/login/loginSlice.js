@@ -35,7 +35,6 @@ export default function loginReducer(state = DEFAULT_STATE, action) {
       return { ...state, id, username, email, firstName: first_name, lastName: last_name, icon, is_creator };
     }
     case SIGN_OUT:
-      window.location.href = '/'; // refresh all state. unoptimal but easy
       return {
         ...state,
         id: DEFAULT_STATE.id,
