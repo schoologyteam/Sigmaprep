@@ -72,15 +72,7 @@ export function standardApiCall(method, route, data = null, resultAction, option
 
     dispatch(startLoading(options?.loadingComponent));
     try {
-      let result = null;
-      if (method === 'post' || method === 'put' || method === 'patch') {
-        result = await axios[method.toLowerCase()](route, data, options?.axiosConfig);
-      } else if (method === 'get' || method === 'delete') {
-        result = await axios[method.toLowerCase()](route, options?.axiosConfig);
-      } else {
-        console.error('standardApiCall: method is not valid', method);
-        return;
-      }
+      const result = await apiCall(method, route, data, options?.axiosConfig);
       if (Array.isArray(resultAction)) {
         for (let i = 0; i < resultAction.length; i++) {
           dispatch({ type: resultAction[i], payload: result.data });
@@ -93,9 +85,9 @@ export function standardApiCall(method, route, data = null, resultAction, option
       dispatch(stopLoading(options?.loadingComponent));
       return result.data;
     } catch (error) {
-      console.error(error);
+      console.error(`actual error: ${error}`);
       const errorMessage = handleApiError(error, dispatch, options?.errorMsg);
-      console.error(errorMessage);
+      console.error(`error message from client/server: ${errorMessage}`);
 
       dispatch(stopLoading(options?.loadingComponent));
 
@@ -104,4 +96,17 @@ export function standardApiCall(method, route, data = null, resultAction, option
       // }
     }
   };
+}
+
+async function apiCall(method, route, data, config) {
+  let result = null;
+  if (method === 'post' || method === 'put' || method === 'patch') {
+    result = await axios[method.toLowerCase()](route, data, config);
+  } else if (method === 'get' || method === 'delete') {
+    result = await axios[method.toLowerCase()](route, config);
+  } else {
+    console.error('standardApiCall: method is not valid', method);
+    throw new Error(`standardApiCall: method is not valid ${method}`);
+  }
+  return result;
 }
