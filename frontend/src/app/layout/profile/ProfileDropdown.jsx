@@ -41,13 +41,6 @@ export default function ProfileDropdown({ activePage, handlePageChange, hasStrea
             onSubmit={() => {
               // timeout is because if no timeout dispatch(signOut()); would not get ran
               dispatch(signOut());
-              setTimeout(() => {
-                navigate('/'); // was using my changeNavPage but it didnt run fast enough I Dont think
-
-                setConfirmOpen(false);
-
-                navigate(0); // reloads page so store is reset should null it all out to be more performant
-              }, 500);
             }}
           />
         ) : null}

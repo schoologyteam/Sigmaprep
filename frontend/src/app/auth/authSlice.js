@@ -4,6 +4,9 @@ import { selectItemById } from 'maddox-js-funcs';
 import { ADMIN_ACCOUNT_ID } from '../../../../constants.js';
 import { createSelector } from 'reselect';
 
+/**
+ * Hydrates User State
+ */
 export function getCurUser() {
   return standardApiCall('get', '/api/auth/verify', null, LOGIN, { loadingComponent: 'AuthPopup' });
 }
