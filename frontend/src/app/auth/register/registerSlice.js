@@ -1,6 +1,6 @@
 import { standardApiCall } from '@utils/api';
 
-const REGISTER = 'app/auth/register/REGISTER'; // change to login to auto login?
+const REGISTER = 'app/auth/register/REGISTER';
 
 export function register(username, email, password) {
   return standardApiCall('post', '/api/auth/register', { username, email, password }, REGISTER, {

@@ -3,7 +3,7 @@ import { Grid, Header, Segment, Button, Icon, ButtonGroup } from 'semantic-ui-re
 import QuestionList from './QuestionList';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeNavbarPage, selectNavbarState, updateQuestionId } from '@app/layout/navbar/navbarSlice';
-import { selectLoadingState } from '@app/store/loadingSlice';
+import { selectLoadingState, startLoading, stopLoading } from '@app/store/loadingSlice';
 import ChoiceRouter from './choices/ChoiceRouter';
 import { useNavigate } from 'react-router-dom';
 import QuestionReport from './qreport/QuestionReport';
@@ -73,8 +73,11 @@ export default function QuestionPage() {
       (questionVoteLoading === false || questionVoteLoading === undefined)
     ) {
       if (!questionId) {
-        dispatch(updateQuestionId(parseInt(questions?.[0]?.id)));
-        dispatch(changeNavbarPage(navigate, parseInt(questions?.[0]?.id)));
+        setSelectedQuestion({});
+        dispatch(
+          //bad fix but works
+          changeNavbarPage(navigate, `/class/${schoolName}/${classId}/group/${groupId}/question/${parseInt(questions?.[0]?.id)}`),
+        );
       } else {
         setSelectedQuestion(selectItemById(questions, 'id', questionId));
       }
