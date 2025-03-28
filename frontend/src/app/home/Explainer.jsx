@@ -43,10 +43,10 @@ export default function Explainer() {
                 <Card.Content textAlign='center'>
                   <Icon name='magic' size='huge' color='purple' style={{ marginBottom: '0.5em' }} />
                   <Card.Header as='h4' style={{ fontSize: '1.33em', color: '#333' }}>
-                    Generate AI-Powered Content
+                    Insert your exam
                   </Card.Header>
                   <Card.Description style={{ fontSize: '1.1em', color: '#666' }}>
-                    Use the AI-generated Content feature to get personalized study material.
+                    Use the AI Exam Parser feature to study your exam and let others study it.
                   </Card.Description>
                 </Card.Content>
               </Card>
@@ -58,7 +58,7 @@ export default function Explainer() {
                     Explore the Question Bank
                   </Card.Header>
                   <Card.Description style={{ fontSize: '1.1em', color: '#666' }}>
-                    Browse through the AI Content or Create your own questions.
+                    After the exam is inserted, it will instantly be ready to study!
                   </Card.Description>
                 </Card.Content>
               </Card>

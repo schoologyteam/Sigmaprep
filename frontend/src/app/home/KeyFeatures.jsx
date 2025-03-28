@@ -7,17 +7,18 @@ export default function KeyFeatures() {
     {
       icon: extensiveDucks,
       title: 'Extensive Exam Bank',
-      description: 'Access a wide range of Exams across multiple schools and classes.',
+      description: 'Access exams from various schools and classes.',
+    },
+
+    {
+      icon: libraryComputerDucks,
+      title: 'Effective Studying',
+      description: 'Study questions from any exam with ease.',
     },
     {
       icon: kiteDuck,
-      title: 'AI Generated Questions',
-      description: 'Leverage AI to generate personalized questions tailored to your strengths and weaknesses.',
-    },
-    {
-      icon: libraryComputerDucks,
-      title: 'Track Your Progress',
-      description: 'Monitor your learning journey and identify areas for improvement.',
+      title: 'AI Exam Parser',
+      description: 'Easily convert past exams into studyable content.',
     },
   ];
   return (

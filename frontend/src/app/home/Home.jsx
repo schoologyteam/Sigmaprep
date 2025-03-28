@@ -58,8 +58,7 @@ export default function Home() {
                       lineHeight: 1.6,
                     }}
                   >
-                    Access a wide range of exams and practice questions to prepare for your exams, with personalized study
-                    material and expert AI-driven guidance.
+                    Easily find free past exams & study material filtered by your college.
                   </p>
 
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '2rem' }}>
