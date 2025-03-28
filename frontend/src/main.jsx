@@ -6,6 +6,7 @@ import store from '@app/store/store.js';
 
 import AppRouter from '@app/AppRouter';
 import { ToastContainer } from 'react-toastify';
+import mixpanel from 'mixpanel-browser';
 
 export default function Main() {
   return (
@@ -15,6 +16,12 @@ export default function Main() {
     </Provider>
   );
 }
+
+mixpanel.init('27ace4d02b50eacc12d13145de4d49fb', {
+  debug: true,
+  track_pageview: true,
+  persistence: 'localStorage',
+});
 
 const root = createRoot(document.getElementById('root'));
 root.render(<Main />);

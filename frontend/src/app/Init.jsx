@@ -10,6 +10,7 @@ import { getSchools } from '@app/class/school/schoolSlice';
 import { getHasStreak } from '@app/streak/streakSlice';
 import { getAnnouncement } from './layout/navbar/navbarSlice';
 import { clearChat } from './chatbot/chatbotSlice';
+import mixpanel from 'mixpanel-browser';
 export default function Init() {
   const user = useSelector(selectUser).user;
   const navigate = useNavigate();
@@ -37,6 +38,8 @@ export default function Init() {
   // on login init and on logout
   useEffect(() => {
     if (user?.id) {
+      mixpanel.identify(user.id);
+      mixpanel.people.set({ $username: user.username, $email: user.email, $is_creator: user.is_creator });
       dispatch(getHasStreak());
       dispatch(getFavoriteQuestions());
       dispatch(getCurrentChoices());
