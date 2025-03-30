@@ -9,11 +9,10 @@ export default function KeyFeatures() {
       title: 'Extensive Exam Bank',
       description: 'Access exams from various schools and classes.',
     },
-
     {
       icon: libraryComputerDucks,
       title: 'Effective Studying',
-      description: 'Study questions from any exam with ease.',
+      description: 'Study relevant exam questions from past exams with ease.',
     },
     {
       icon: kiteDuck,

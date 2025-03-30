@@ -12,9 +12,12 @@ const About = () => {
         About QuackPrep
       </Header>
       <p style={{ fontSize: '1.2rem', textAlign: 'center', marginBottom: '2rem', color: '#555' }}>
-        QuackPrep is your ultimate study companion, designed to help students excel in their exams and coursework. With an
-        ever-growing library of AI-generated practice questions and tailored recommendations, QuackPrep ensures you always have
-        the right material to focus on.
+        When <strong>college students</strong> need to study for their exam, they go to past exams to study in order to see what
+        the current exam will be like and practice what will actually be on the exam. Finding paid exams randomly online or on
+        quizlet doesn't work because students can't pay for exams and quizlet never has the needed exams and if it does you can't
+        easily find it. Students then study other material, but don't study what the exam will actually be like and are unprepared
+        when they get to the actual exam, as it's nothing like what they studied. So we built quackprep.com that helps college
+        students always find and have free access to these past exams.
       </p>
 
       <Header as='h2' textAlign='center' style={{ fontSize: '2rem', marginBottom: '1rem' }}>
