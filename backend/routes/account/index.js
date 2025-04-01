@@ -17,8 +17,8 @@ router.post("/edit", isAuthenticated, async function (req, res, next) {
     const editProfileSchema = z.object({
       username: z.string().min(1),
       icon_link: z.string().min(1).nullable(),
-      first_name: z.string().optional(),
-      last_name: z.string().optional(),
+      first_name: z.string().optional().nullable(),
+      last_name: z.string().optional().nullable(),
     });
 
     const parsedData = editProfileSchema.parse(req.body);
