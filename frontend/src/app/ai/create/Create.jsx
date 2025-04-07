@@ -69,6 +69,12 @@ export default function CreatePage() {
                     Add past exams and topics to the content bank to study smarter and help others do the same.
                   </Header.Subheader>
                 </Header.Content>
+                <Header as={'h4'}>
+                  need more help? :{' '}
+                  <a href='https://www.youtube.com/shorts/Q39U5Y4GvLg' target='_blank' rel='noopener noreferrer'>
+                    video tutorial (50s)
+                  </a>
+                </Header>
               </Header>
               <Divider />
             </Grid.Column>
