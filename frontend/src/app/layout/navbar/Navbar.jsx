@@ -114,7 +114,7 @@ export default function Navbar({ isMobile, sidebarOpened, handlePageChange, acti
       <ToggleEditComponent />
       <AdsenseAd
         style={{
-          flex: isMobile ? '1 1 100px' : '1 1 200px', // Fixed width
+          flex: '1 1 200px', // Fixed width
           alignSelf: 'flex-start', // Align top
         }}
         adSlot={'5685522625'}
