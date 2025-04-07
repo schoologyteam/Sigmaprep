@@ -3,6 +3,7 @@ import BrandLogo from '@app/layout/brandlogo/BrandLogo';
 import ProfileDropdown from '@app/layout/profile/ProfileDropdown';
 import ToggleEditComponent from '@components/ToggleEdit';
 import { Link } from 'react-router-dom';
+import AdsenseAd from '@components/Ad';
 
 // Define styles
 const menuItemStyle = {
@@ -111,6 +112,13 @@ export default function Navbar({ isMobile, sidebarOpened, handlePageChange, acti
       )}
 
       <ToggleEditComponent />
+      <AdsenseAd
+        style={{
+          flex: isMobile ? '1 1 100px' : '1 1 200px', // Fixed width
+          alignSelf: 'flex-start', // Align top
+        }}
+        adSlot={'5685522625'}
+      />
     </Sidebar>
   );
 }
