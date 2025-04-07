@@ -114,6 +114,7 @@ export default function Navbar({ isMobile, sidebarOpened, handlePageChange, acti
       <ToggleEditComponent />
       <AdsenseAd
         style={{
+          minHeight: '200px',
           flex: '1 1 200px', // Fixed width
           alignSelf: 'flex-start', // Align top
         }}
