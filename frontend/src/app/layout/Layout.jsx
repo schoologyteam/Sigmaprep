@@ -47,7 +47,7 @@ export default function Layout({ children }) {
     <div style={{ minHeight: '100vh' }}>
       {/* MOBILE TOP BAR (Only for small screens) */}
       {isMobile && (
-        <Menu style={{ position: 'fixed', zIndex: 9999, height: '4.5rem' }} inverted attached='top' borderless>
+        <Menu style={{ position: 'fixed', zIndex: 1, height: '4.5rem' }} inverted attached='top' borderless>
           <Menu.Item onClick={() => handleToggleSidebar()}>
             <Icon name='sidebar' />
           </Menu.Item>
