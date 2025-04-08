@@ -43,7 +43,7 @@ export async function upsertQuestionPost(
     text = :text
     `,
       { id, post_id, question_id, text, user_id },
-      { verifyUserOwnsRowId: "question_posts_forum" }
+      { verifyUserOwnsRowId: "question_forum_posts" }
     )
   ).insertId;
   return (
@@ -57,7 +57,7 @@ export async function deleteQuestionPost(id, user_id) {
   await sqlExe.executeCommand(
     `UPDATE question_forum_posts SET deleted = 1 WHERE id = :id`,
     { id, user_id },
-    { verifyUserOwnsRowId: "question_posts_forum" }
+    { verifyUserOwnsRowId: "question_forum_posts" }
   );
   return id;
 }
