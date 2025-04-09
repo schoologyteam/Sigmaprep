@@ -48,12 +48,15 @@ export default function Sentinel() {
   const classes = useSelector(selectClassState);
   const groups = useSelector(selectGroupsState);
 
+  // SEO USE EFFECT //
   useEffect(() => {
     const urlArr = getFixedUrlArr(location.pathname);
     if (urlArr[1] === 'blog' && urlArr[2]) {
-      document.title = Blog.getBlogFromLink(blogs, urlArr[2])?.getTitle() || '404 Blog - Quackprep';
+      document.title = Blog.getBlogFromLink(blogs, urlArr[2])?.getTitle() || '404 Blog';
+    } else if (className && schoolName && groupName) {
+      document.title = schoolName + ' ' + className + ' ' + groupName;
     } else if (className && schoolName) {
-      document.title = className + '  | ' + schoolName + ' - ' + 'Quackprep';
+      document.title = schoolName + ' ' + className;
     } else if (schoolName) {
       document.title = schoolName + ' - ' + 'Quackprep';
     } else if (urlArr[1]) {
