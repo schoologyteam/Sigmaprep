@@ -35,6 +35,7 @@ export default function MarkdownRenderer({ render, components = {}, allowLinks =
     .replaceAll('$', '$$');
 
   if (
+    false && // render in markdown always
     !processedRender?.includes('```') &&
     !processedRender?.includes('$') &&
     !processedRender?.includes('/') &&
