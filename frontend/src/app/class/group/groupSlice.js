@@ -21,11 +21,13 @@ export function getGroupsByClassId(classId) {
  * @param {FormData} Formdata - contains the files to upload
  * @param {number} class_id - The ID of the class
  * @param {string} prompt - The AI prompt to send
+ * @param {boolean} save_pdf - If true, save the PDF to S3 and link it to the group
  * @returns
  */
-export function createGroupGivenPDF(formData, class_id, prompt) {
+export function createGroupGivenPDF(formData, class_id, prompt, save_pdf) {
   formData.append('prompt', prompt); // Add the prompt
   formData.append('class_id', class_id); // Add the class_id
+  formData.append('save_pdf', save_pdf); // Add the save_pdf flag
   return async function (dispatch, getState) {
     const group_id = await standardApiCall('post', `/api/ai/group/`, formData, null, {
       // this will not update state to much work just have user refresh or smth

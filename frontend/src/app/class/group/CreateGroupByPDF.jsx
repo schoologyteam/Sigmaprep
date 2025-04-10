@@ -9,11 +9,12 @@ import { selectLoadingState } from '@app/store/loadingSlice';
 export default function CreateGroupByPDF({ classId }) {
   const dispatch = useDispatch();
   const [customPrompt, setCustomPrompt] = useState('');
+  const [savePdf, setSavePdf] = useState(false);
   const loading = useSelector(selectLoadingState).loadingComps.CreateGroupByPDF;
 
   function handlePdfSubmit(formData) {
     if (classId) {
-      dispatch(createGroupGivenPDF(formData, classId, customPrompt || null));
+      dispatch(createGroupGivenPDF(formData, classId, customPrompt || null, savePdf));
       setCustomPrompt('');
     } else {
       window.alert('Please select a class first');
@@ -52,6 +53,22 @@ export default function CreateGroupByPDF({ classId }) {
           For the best results please send the ai the answers or answer key. If not available, it will try to solve them.
         </Header.Subheader>
         <div style={{ marginBottom: '1rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5rem' }}>
+            <input
+              type='checkbox'
+              id='savePdfCheckbox'
+              checked={savePdf}
+              onChange={(e) => setSavePdf(e.target.checked)}
+              style={{ marginRight: '0.5rem' }}
+            />
+            <label htmlFor='savePdfCheckbox' style={{ fontWeight: 'bold', margin: 0 }}>
+              Save PDF to S3?{' '}
+              <Popup
+                content='This will save the PDF to the server and link it to the group to show to everyone.'
+                trigger={<Icon name='info circle' color='blue' />}
+              />
+            </label>
+          </div>
           <label style={{ fontWeight: 'bold' }}>
             Custom Prompt{' '}
             <Popup

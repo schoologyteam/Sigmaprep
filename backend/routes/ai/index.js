@@ -52,7 +52,7 @@ router.post(
     try {
       const {
         files,
-        body: { class_id, prompt: user_given_context },
+        body: { class_id, prompt: user_given_context, save_pdf },
       } = req;
 
       if (user_given_context?.length > MAX_USER_PROMPT_LENGTH) {
@@ -73,7 +73,8 @@ router.post(
         files,
         class_id,
         req.user,
-        user_given_context
+        user_given_context,
+        { save_pdf }
       );
       res.status(201).json(result);
     } catch (error) {

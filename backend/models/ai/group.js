@@ -55,10 +55,18 @@ async function uploadFileToS3(folder, file) {
  * @param {Number} class_id
  * @param {Number} user_id
  * @param {String} user_prompt
+ * @param {Object} options
+ * @param {Boolean} options.save_pdf if true, will save the pdf to s3 and link it to the group
  * @returns {Number} group_id the created group's id
  */
 
-export async function etlFilesIntoGroup(files, class_id, user_id, user_prompt) {
+export async function etlFilesIntoGroup(
+  files,
+  class_id,
+  user_id,
+  user_prompt,
+  options = {}
+) {
   user_prompt =
     user_prompt ??
     "parse through and only respond with whats needed based on the json schema";
@@ -104,7 +112,11 @@ export async function etlFilesIntoGroup(files, class_id, user_id, user_prompt) {
       throw new Error("group id not found when group id is needed");
     }
     try {
-      if (secrets.NODE_ENV === NODE_ENVS_AVAILABLE.prod) {
+      dlog(`user choose save_pdf: ${options?.save_pdf}`);
+      if (
+        secrets.NODE_ENV === NODE_ENVS_AVAILABLE.prod &&
+        options?.save_pdf === true
+      ) {
         for (let i = 0; i < files.length; i++) {
           const uuid = await uploadFileToS3("group_inserts", files[i]);
           uploadFileLinkToGroup(
