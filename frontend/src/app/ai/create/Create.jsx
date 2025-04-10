@@ -10,6 +10,7 @@ import { changeNavbarPage, getStartedNow } from '@app/layout/navbar/navbarSlice'
 import CreateGroupByPDF from '@app/class/group/CreateGroupByPDF';
 import { makeUserACreator } from '@app/creator/creatorSlice';
 import { selectLoadingState } from '@app/store/loadingSlice';
+import LoginRequired from '@app/auth/LoginRequired';
 
 export default function CreatePage() {
   const dispatch = useDispatch();
@@ -35,6 +36,13 @@ export default function CreatePage() {
     }
   }, [user?.is_creator, user_id, dispatch]);
 
+  useEffect(() => {
+    // when classes loaded in
+    if (userCreatedClasses && userCreatedClasses.length > 0) {
+      setClassId(userCreatedClasses[0].id); // Set the first class as the default selected class
+    }
+  }, [userCreatedClasses]);
+
   const shouldCreateDefaultClass =
     haveGottenClassesByUserId.current &&
     !loading &&
@@ -45,16 +53,16 @@ export default function CreatePage() {
     userCreatedClasses.length === 0;
 
   useEffect(() => {
-    if (user_id && !user?.is_creator && !loading) {
-      console.log('making user a creator');
-      dispatch(makeUserACreator());
-    } else if (shouldCreateDefaultClass) {
+    if (shouldCreateDefaultClass) {
       defaultClassCreated.current = true;
       console.log('creating default class for user!');
       dispatch(createDefaultUserClass());
     }
   }, [user_id, dispatch, user?.is_creator, loading, shouldCreateDefaultClass]);
-
+  console.log(user.id);
+  if (!user.id) {
+    return <LoginRequired title={'Ai Exam parser'} />;
+  }
   return (
     <Container style={{ minHeight: '60vh' }}>
       <Segment raised padded loading={loading}>

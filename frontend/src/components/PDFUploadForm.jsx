@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Button, Icon, List, Message } from 'semantic-ui-react';
+import { Button, Icon, List, Message, Segment } from 'semantic-ui-react';
 import { MAX_FILE_SIZE_IN_BYTES, ALLOWED_FILE_TYPES, MAX_FILES_UPLOAD } from '../../../constants.js';
 
 const PdfUploadForm = ({ onSubmit, showImages = true, buttonText = 'Submit' }) => {
@@ -105,64 +105,84 @@ const PdfUploadForm = ({ onSubmit, showImages = true, buttonText = 'Submit' }) =
   };
 
   return (
-    <div key={`ai-group-create-${count}`} style={{ margin: '2rem auto' }}>
-      <div
-        style={{
-          border: '2px dashed #ccc',
-          borderRadius: '5px',
-          padding: '2rem',
-          textAlign: 'center',
-          backgroundColor: isDragging ? '#eee' : '#fff',
-          transition: 'background-color 0.2s ease',
-        }}
-        onDragOver={handleDragOver}
-        onDragLeave={handleDragLeave}
-        onDrop={handleDrop}
-        onClick={handleChooseFilesClick}
-      >
-        <Icon name='file pdf outline' size='huge' />
-        <p style={{ marginTop: '1rem' }}>
-          {isDragging ? 'Drop your PDF/Image here...' : `Click HERE or Drag & Drop your PDF/Image files`}
-        </p>
+    <Segment
+      placeholder
+      raised
+      style={{
+        background: 'linear-gradient(145deg, #f6f8fa 0%, #eef2f6 100%)',
+        border: '2px dashed #ccd6e0',
+        padding: '3rem 2rem',
+        marginTop: '2rem',
+        boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
+      }}
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      onDrop={handleDrop}
+      onClick={handleChooseFilesClick}
+    >
+      <div key={`ai-group-create-${count}`} style={{ margin: '2rem auto' }}>
+        <div
+          style={{
+            border: '2px dashed #ccc',
+            borderRadius: '5px',
+            padding: '2rem',
+            textAlign: 'center',
+            backgroundColor: isDragging ? '#eee' : '#fff',
+            transition: 'background-color 0.2s ease',
+          }}
+        >
+          <Icon name='file pdf outline' size='huge' />
+          <p style={{ marginTop: '1rem' }}>
+            {isDragging ? 'Drop your PDF/Image here...' : `Click HERE or Drag & Drop your PDF/Image files`}
+          </p>
+        </div>
+        <input
+          ref={fileInputRef}
+          id='file'
+          type='file'
+          accept={ALLOWED_FILE_TYPES.join(',')}
+          hidden
+          multiple
+          onChange={handleFileInput}
+        />
+        {error && (
+          <Message negative style={{ marginTop: '1rem' }}>
+            <Message.Header>File Error</Message.Header>
+            <p>{error}</p>
+          </Message>
+        )}
+        {files.length > 0 && (
+          <List divided style={{ marginTop: '1rem' }}>
+            {files.map((file, index) => (
+              <List.Item key={index}>
+                <List.Content floated='right'>
+                  <Button icon='trash' color='red' onClick={() => handleRemoveFile(index)} />
+                </List.Content>
+                <List.Icon name='file pdf outline' size='large' verticalAlign='middle' />
+                <List.Content>
+                  {showImages && file.type.startsWith('image/') ? (
+                    <img src={URL.createObjectURL(file)} alt={file.name} style={{ width: '100px', height: 'auto' }} />
+                  ) : (
+                    file.name
+                  )}
+                </List.Content>
+              </List.Item>
+            ))}
+          </List>
+        )}
+        <Button
+          type='button'
+          color='blue'
+          style={{ marginTop: '1rem' }}
+          onClick={(e, d) => {
+            e.stopPropagation();
+            handleSubmit();
+          }}
+        >
+          <Icon name='upload' /> {buttonText}
+        </Button>
       </div>
-      <input
-        ref={fileInputRef}
-        id='file'
-        type='file'
-        accept={ALLOWED_FILE_TYPES.join(',')}
-        hidden
-        multiple
-        onChange={handleFileInput}
-      />
-      {error && (
-        <Message negative style={{ marginTop: '1rem' }}>
-          <Message.Header>File Error</Message.Header>
-          <p>{error}</p>
-        </Message>
-      )}
-      {files.length > 0 && (
-        <List divided style={{ marginTop: '1rem' }}>
-          {files.map((file, index) => (
-            <List.Item key={index}>
-              <List.Content floated='right'>
-                <Button icon='trash' color='red' onClick={() => handleRemoveFile(index)} />
-              </List.Content>
-              <List.Icon name='file pdf outline' size='large' verticalAlign='middle' />
-              <List.Content>
-                {showImages && file.type.startsWith('image/') ? (
-                  <img src={URL.createObjectURL(file)} alt={file.name} style={{ width: '100px', height: 'auto' }} />
-                ) : (
-                  file.name
-                )}
-              </List.Content>
-            </List.Item>
-          ))}
-        </List>
-      )}
-      <Button type='button' color='blue' style={{ marginTop: '1rem' }} onClick={handleSubmit}>
-        <Icon name='upload' /> {buttonText}
-      </Button>
-    </div>
+    </Segment>
   );
 };
 

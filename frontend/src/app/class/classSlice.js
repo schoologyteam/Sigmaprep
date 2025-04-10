@@ -12,6 +12,7 @@ export const UPSERT_CRUD_CLASSES = 'app/class/UPSERT_CRUD_CLASSES';
 export function createDefaultUserClass() {
   return async function (dispatch, getState) {
     const { username } = selectUser(getState()).user;
+
     await standardApiCall(
       'post',
       `/api/class/`,

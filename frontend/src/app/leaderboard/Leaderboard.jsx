@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Container, Header, Icon, Grid, Card, List, Image, Segment, Label, Progress, Statistic } from 'semantic-ui-react';
 import { getTopStreaks, getWhichUsersAnsweredMostQuestions, selectLeaderboardState } from './leaderboardSlice';
 import { selectLoadingState } from '../store/loadingSlice';
-import CreatorBadge from '@components/CreatorBadge';
 import { getDefaultIconUrl } from '../../../../globalFuncs.js';
 
 const TOP_X_AMT = 5; // Keep 5
@@ -44,7 +43,7 @@ const LeaderboardCard = ({ title, icon, iconColor, data, dataKey }) => (
               <List.Content>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <List.Header as='h3'>{item.username}</List.Header>
-                  {item?.is_creator == 1 && <CreatorBadge />}
+                  {/* {item?.is_creator == 1 && <CreatorBadge />} */}
                 </div>
                 <List.Description>
                   <Statistic value={item[dataKey]} />
