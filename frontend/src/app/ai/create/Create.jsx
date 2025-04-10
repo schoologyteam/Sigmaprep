@@ -37,7 +37,7 @@ export default function CreatePage() {
 
   useEffect(() => {
     // when classes loaded in
-    if (userCreatedClasses && userCreatedClasses.length > 0) {
+    if (userCreatedClasses && userCreatedClasses.length > 0 && userCreatedClasses[0]?.id) {
       setClassId(userCreatedClasses[0].id); // Set the first class as the default selected class
     }
   }, [userCreatedClasses]);
@@ -58,7 +58,6 @@ export default function CreatePage() {
       dispatch(createDefaultUserClass());
     }
   }, [dispatch, shouldCreateDefaultClass]);
-  console.log(user.id);
   if (!user.id) {
     return <LoginRequired title={'Ai Exam parser'} />;
   }
