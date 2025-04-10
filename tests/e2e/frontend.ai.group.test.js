@@ -4,15 +4,16 @@ import { path_to_assets } from "../index.js";
 import fs from "fs";
 import { TEST_ACCOUNT_USER } from "constants.js";
 
-test("check if auto create class when no classes found works, given a new account create a default class for the user", async ({
+test("check if auto create class when user has no classes, given a new account create a default class for the user", async ({
   page,
 }) => {
   await page.goto("http://localhost:3001/");
   await login(page);
   await page.getByRole("link", { name: "AI Exam Parser" }).click();
-  await page.getByText("Please select a class from").click();
-  await page.getByText("No Class Selected").click();
-  await page.getByText("Please select a class from").click();
+  await page.waitForTimeout(4000); // wait for 2 seconds
+  // await page.getByText("Please select a class from").click();
+  // await page.getByText("No Class Selected").click();
+  // await page.getByText("Please select a class from").click(); auto selects class now
   await page.locator("#select-class-to-use-ai-create").click();
   await page
     .getByRole("option", { name: `${TEST_ACCOUNT_USER}'s Study` })

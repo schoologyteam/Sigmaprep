@@ -8,7 +8,6 @@ import { selectArrayOfStateById } from 'maddox-js-funcs';
 import { mapClassesToDropdown } from '@app/creator/forms/dropdownMappings';
 import { changeNavbarPage, getStartedNow } from '@app/layout/navbar/navbarSlice';
 import CreateGroupByPDF from '@app/class/group/CreateGroupByPDF';
-import { makeUserACreator } from '@app/creator/creatorSlice';
 import { selectLoadingState } from '@app/store/loadingSlice';
 import LoginRequired from '@app/auth/LoginRequired';
 
@@ -58,7 +57,7 @@ export default function CreatePage() {
       console.log('creating default class for user!');
       dispatch(createDefaultUserClass());
     }
-  }, [user_id, dispatch, user?.is_creator, loading, shouldCreateDefaultClass]);
+  }, [dispatch, shouldCreateDefaultClass]);
   console.log(user.id);
   if (!user.id) {
     return <LoginRequired title={'Ai Exam parser'} />;
