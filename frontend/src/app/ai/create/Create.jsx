@@ -40,7 +40,7 @@ export default function CreatePage() {
     if (userCreatedClasses && userCreatedClasses.length > 0 && userCreatedClasses[0]?.id) {
       setClassId(userCreatedClasses[0].id); // Set the first class as the default selected class
     }
-  }, [userCreatedClasses]);
+  }, [userCreatedClasses?.length]);
 
   const shouldCreateDefaultClass =
     haveGottenClassesByUserId.current &&
