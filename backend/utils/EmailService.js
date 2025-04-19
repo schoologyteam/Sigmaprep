@@ -26,9 +26,8 @@ This means you don't need to create an instance of EmailService just to access t
   });
 
   async sendEmail(html, subject) {
-    console.log(this.to);
     try {
-      dlog(`sending email to ${this.to}`);
+      console.log(`sending email to ${this.to}`);
       const config = {
         from: EmailService.from,
         to: this.to,
@@ -45,7 +44,7 @@ This means you don't need to create an instance of EmailService just to access t
       }
     } catch (e) {
       console.log("FAILED TO SEND EMAIL");
-      console.error(e);
+      console.error("errored sending email:", e);
     }
   }
 }

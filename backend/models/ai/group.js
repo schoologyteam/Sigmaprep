@@ -145,6 +145,8 @@ export async function etlFilesIntoGroup(
       await addManyChoicesToQuestion(question.id, user_id, curQuestion.options);
     }
 
+    console.log("successfully etlFilesIntoGroup, sending email now!");
+
     // for email ////////////////////
     const { school_name } = await getSchoolByClassId(class_id);
     const emailHTML = `
