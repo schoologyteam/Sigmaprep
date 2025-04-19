@@ -33,7 +33,8 @@ export function createGroupGivenPDF(formData, class_id, prompt, save_pdf) {
       // this will not update state to much work just have user refresh or smth
       loadingComponent: ['CreateGroupByPDF'],
       noticeOfSuccess: 'successfully generate group by AI!',
-      errorMsg: 'failed to generate group, make sure to send readable images!',
+      errorMsg:
+        'failed to generate group, make sure to send readable images! This may also be a server issue, contact support for help!',
       axiosConfig: {
         headers: { 'Content-Type': 'multipart/form-data' },
         timeout: MAX_QUACK_CREATE_GROUP_REQUEST_WAIT_TIME_IN_MS,
