@@ -227,7 +227,7 @@ export async function etlFilesIntoGroup(
       emailHTML
     ).catch(() => console.log(`failed to send email to user_id:${user_id}`));
     ///////////////////////////////////
-
+    console.log(`returning groupid: ${group.id} to user`);
     return group.id;
   } catch (error) {
     if (group && group.id) {

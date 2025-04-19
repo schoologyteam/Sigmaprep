@@ -25,7 +25,7 @@ function handleApiError(error, dispatch, customMSG) {
 
     default: {
       // all others can just be shown to the user.
-      const errorMessage = `${customMSG || ''}\n${errorResponse?.message && `Server Msg: ${errorResponse?.message}`} ${
+      const errorMessage = `${customMSG || ''}\n${errorResponse?.message ? `Server Msg: ${errorResponse?.message}` : ''} ${
         !customMSG && !errorResponse?.message ? 'An Unexpected Error has occured.' : ''
       }`;
       toast.error(errorMessage, { autoClose: false });
