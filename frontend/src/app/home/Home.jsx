@@ -20,7 +20,7 @@ export default function Home() {
       <Segment
         basic
         vertical
-        textAlign='left'
+        textAlign='center'
         style={{
           marginTop: 0,
           minHeight: '90vh',
@@ -32,7 +32,7 @@ export default function Home() {
         <Container>
           <Grid stackable verticalAlign='middle'>
             <Grid.Row>
-              <Grid.Column width={7} style={{ paddingRight: '4em', paddingLeft: '3em' }}>
+              <Grid.Column width={7} textAlign='left' style={{ paddingRight: '4em', paddingLeft: '3em' }}>
                 <Header
                   as='h1'
                   style={{
@@ -53,25 +53,34 @@ export default function Home() {
                   <p
                     style={{
                       fontSize: '1.25rem',
-
                       color: '#636e72',
                       lineHeight: 1.6,
+                      marginBottom: '1.5rem',
                     }}
                   >
                     Easily find free past exams & study material filtered by your college.
                   </p>
 
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '2rem' }}>
-                    <a href='https://discord.com/invite/APy5379qT8'>
-                      <span style={{ fontSize: '0.875rem', color: '#636e72' }}>Join the community today</span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '2rem' }}>
+                    <a
+                      href='https://discord.com/invite/APy5379qT8'
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        textDecoration: 'none',
+                        transition: 'transform 0.2s',
+                      }}
+                      onMouseOver={(e) => (e.currentTarget.style.transform = 'translateY(-2px)')}
+                      onMouseOut={(e) => (e.currentTarget.style.transform = 'none')}
+                    >
+                      <span style={{ fontSize: '0.875rem', color: '#636e72', marginRight: '8px' }}>Join the community today</span>
                       <img
                         src='/icon/discord_icon.svg'
                         alt='Discord'
                         style={{
-                          width: '20px',
-                          height: '20px',
-                          verticalAlign: 'middle', // Adjust this value as needed
-                          transition: 'transform 0.2s ease',
+                          width: '24px',
+                          height: '24px',
+                          verticalAlign: 'middle',
                         }}
                       />
                     </a>
@@ -87,10 +96,18 @@ export default function Home() {
                       color: 'white',
                       padding: '1.2em 2em',
                       borderRadius: '12px',
-                      transition: 'transform 0.2s',
+                      fontWeight: '600',
+                      boxShadow: '0 4px 10px rgba(74, 144, 226, 0.3)',
+                      transition: 'all 0.3s ease',
                     }}
-                    onMouseOver={(e) => (e.currentTarget.style.transform = 'translateY(-2px)')}
-                    onMouseOut={(e) => (e.currentTarget.style.transform = 'none')}
+                    onMouseOver={(e) => {
+                      e.currentTarget.style.transform = 'translateY(-2px)';
+                      e.currentTarget.style.boxShadow = '0 6px 15px rgba(74, 144, 226, 0.4)';
+                    }}
+                    onMouseOut={(e) => {
+                      e.currentTarget.style.transform = 'none';
+                      e.currentTarget.style.boxShadow = '0 4px 10px rgba(74, 144, 226, 0.3)';
+                    }}
                   >
                     Get Started
                     <Icon name='right arrow' style={{ marginLeft: '0.5em' }} />
@@ -149,6 +166,56 @@ export default function Home() {
       <HomeGraph />
       <Explainer />
       <Testimonials />
+      <div
+        style={{
+          width: '100%',
+          maxWidth: '1200px',
+          margin: '4rem auto',
+          padding: '3rem 20px',
+          textAlign: 'center',
+          backgroundColor: '#f8f9fa',
+          borderRadius: '16px',
+        }}
+      >
+        <h2 style={{ fontSize: '36px', marginBottom: '20px', color: '#2d3436' }}>Ready to Ace Your Exams?</h2>
+        <p
+          style={{
+            maxWidth: '600px',
+            margin: '0 auto 40px',
+            opacity: 0.9,
+            fontSize: '18px',
+            lineHeight: '1.6',
+          }}
+        >
+          Join hundreds of students who use QuackPrep to find past exams and study materials.
+        </p>
+        <Button
+          onClick={() => dispatch(changeNavbarPage(navigate, '/class'))}
+          style={{
+            backgroundColor: '#4a90e2',
+            color: 'white',
+            padding: '14px 30px',
+            borderRadius: '12px',
+            border: 'none',
+            fontWeight: '600',
+            fontSize: '18px',
+            cursor: 'pointer',
+            boxShadow: '0 4px 10px rgba(74, 144, 226, 0.3)',
+            transition: 'all 0.3s ease',
+          }}
+          onMouseOver={(e) => {
+            e.currentTarget.style.transform = 'translateY(-2px)';
+            e.currentTarget.style.boxShadow = '0 6px 15px rgba(74, 144, 226, 0.4)';
+          }}
+          onMouseOut={(e) => {
+            e.currentTarget.style.transform = 'none';
+            e.currentTarget.style.boxShadow = '0 4px 10px rgba(74, 144, 226, 0.3)';
+          }}
+        >
+          Get Started Now
+          <Icon name='arrow right' style={{ marginLeft: '8px' }} />
+        </Button>
+      </div>
     </div>
   );
 }
