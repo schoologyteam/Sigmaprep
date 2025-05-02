@@ -58,7 +58,7 @@ export default function ChatBot() {
   if (!user_id) return <LoginRequired title='QuackPrepGPT' />;
 
   return (
-    <Segment className='chat-container' style={{ width: '20rem', height: '35rem' }}>
+    <Segment className='chat-container' style={{ width: '40rem', height: '35rem' }}>
       <Grid>
         <Grid.Column width={8}>
           <Button circular style={{ fontSize: '.5em', width: '10em' }} size='mini' onClick={() => dispatch(clearChat())}>
