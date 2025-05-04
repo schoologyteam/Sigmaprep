@@ -34,7 +34,7 @@ export function createGroupGivenPDF(formData, class_id, prompt, save_pdf) {
       loadingComponent: ['CreateGroupByPDF'],
       noticeOfSuccess: 'successfully generate group by AI!',
       errorMsg:
-        'failed to generate group, make sure to send readable images! This may also be a server issue, contact support for help!',
+        'failed to gen group, make sure to send readable images! This may also be a server issue, contact support for help! Its also possible your parse will still finish, check your email soon!',
       axiosConfig: {
         headers: { 'Content-Type': 'multipart/form-data' },
         timeout: MAX_QUACK_CREATE_GROUP_REQUEST_WAIT_TIME_IN_MS,
