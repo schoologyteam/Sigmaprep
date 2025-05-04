@@ -9,7 +9,7 @@ import { selectLoadingState } from '@app/store/loadingSlice';
 export default function CreateGroupByPDF({ classId }) {
   const dispatch = useDispatch();
   const [customPrompt, setCustomPrompt] = useState('');
-  const [savePdf, setSavePdf] = useState(false);
+  const [savePdf, setSavePdf] = useState(true);
   const loading = useSelector(selectLoadingState).loadingComps.CreateGroupByPDF;
 
   function handlePdfSubmit(formData) {
