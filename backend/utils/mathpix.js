@@ -69,7 +69,7 @@ export async function getFormattedPdfByPdfIdMathpix(
 export async function postPDFToMathpix(formData) {
   formData.append("math_inline_delimiters", JSON.stringify(["$$", "$$"]));
   formData.append("math_display_delimiters", JSON.stringify([])); // no display delimiters
-
+  dlog(formData.getHeaders());
   const result = await axios.post(
     "https://api.mathpix.com/v3/pdf",
     formData,

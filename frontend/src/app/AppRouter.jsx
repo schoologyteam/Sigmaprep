@@ -26,8 +26,7 @@ import Auth from './auth/Auth.jsx';
 import Announcement from './extra/Announcement.jsx';
 import Test from './test/Test.jsx';
 import ChatbotWidget from './chatbot/ChatbotWidget.jsx';
-import BlogList from './blog/BlogList.jsx';
-import BlogShow from './blog/BlogShow.jsx';
+import Blog from './blog/Blog.jsx';
 
 export default function AppRouter() {
   return (
@@ -43,8 +42,7 @@ export default function AppRouter() {
           <Route path='/about' element={<AboutPage />} />
           <Route path='/test' element={<Test />} />
           <Route path='/learn' element={<ComingSoon />} />
-          <Route path='/blog' element={<BlogList />} />
-          <Route path='/blog/:blog_link' element={<BlogShow />} />
+          <Route path='/blog' element={<Blog />} />
 
           <Route path='/tos' element={<TOS />} />
           <Route path='/privacy' element={<PrivacyPolicy />} />

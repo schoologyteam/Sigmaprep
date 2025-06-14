@@ -22,8 +22,6 @@ import {
   groupFetchLogic,
   groupUpdateLogic,
 } from './fetchFunction';
-import { blogs } from './blog/blogs';
-import Blog from './blog/Blog';
 
 export default function Sentinel() {
   const {
@@ -51,9 +49,7 @@ export default function Sentinel() {
   // SEO USE EFFECT //
   useEffect(() => {
     const urlArr = getFixedUrlArr(location.pathname);
-    if (urlArr[1] === 'blog' && urlArr[2]) {
-      document.title = Blog.getBlogFromLink(blogs, urlArr[2])?.getTitle() || '404 Blog';
-    } else if (className && schoolName && groupName) {
+    if (className && schoolName && groupName) {
       document.title = schoolName + ' ' + className + ' ' + groupName;
     } else if (className && schoolName) {
       document.title = schoolName + ' ' + className;
