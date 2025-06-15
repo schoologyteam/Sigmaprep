@@ -16,6 +16,7 @@ import useIsMobile from '@utils/hooks/useIsMobile';
 import QuestionPostMain from './post/QuestionPostMain';
 import { selectQuestionsByGroupId } from './questionSlice';
 import ShowGroupsPdfsModal from '../group/ShowGroupsPdfsModal';
+import { selectGroupsState } from '../group/groupSlice';
 
 function getLocalShowAIQuestions() {
   const showAIQuestions = window.localStorage.getItem('showAIQuestions');
@@ -37,6 +38,7 @@ export default function QuestionPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { schoolName, className, classId, groupId, groupName, questionId } = useSelector(selectNavbarState).navbar;
+  const group = useSelector(selectGroupsState)?.find((group) => group.id === groupId);
 
   /**@type {import('../../../../../types.ts').Question[]} */
   let questions = useSelector(selectQuestionsByGroupId());
@@ -150,6 +152,7 @@ export default function QuestionPage() {
         <Header style={{ fontSize: '2.5rem' }} textAlign='center'>
           {groupName} <ShowGroupsPdfsModal />
         </Header>
+        <p style={{ fontSize: '.8rem', color: 'gray', textAlign: 'center' }}>{group?.desc}</p>
 
         <Grid divided>
           <Grid.Row>
