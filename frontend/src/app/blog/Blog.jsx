@@ -9,13 +9,13 @@ export default function Blog() {
     script.async = true; // don’t block paint
 
     script.onload = () => {
-      if (typeof window.initializePage === 'function') {
+      if (typeof window.blogbott_initializePage === 'function') {
         // ⚡️ call the third-party initializer
         // If the function expects a selector or element, pass it here:
         // window.initializePage('#blogbott_container');
-        window.initializePage();
+        window.blogbott_initializePage();
       } else {
-        console.error('BlogBott script loaded, but window.initializePage() is undefined');
+        console.error('BlogBott script loaded, but window.blogbott_initializePage() is undefined');
       }
     };
 
