@@ -54,7 +54,7 @@ export default function Navbar({ isMobile, sidebarOpened, handlePageChange, acti
         name='/create'
       >
         <Icon name='plus' />
-        AI Exam Parser
+        Add A Exam
       </Menu.Item>
 
       {/* <Menu.Item

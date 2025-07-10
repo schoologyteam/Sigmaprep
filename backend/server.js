@@ -20,6 +20,7 @@ import { rateLimits } from "#middleware/rateLimit.js";
 import { secrets } from "#config/secrets.js";
 import { NODE_ENVS_AVAILABLE } from "../constants.js";
 import { maddoxMiddleware } from "#middleware/maddoxMiddleware.js";
+import { generateSitemap } from "#models/extra/index.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -87,6 +88,12 @@ app.use(
 app.use(express.json({ limit: "10kb" })); // everything that requires req.body comes after this (fuck express)
 app.use(badwordsMiddleware);
 app.use("/api", router);
+
+app.get("/sitemap.xml", async (req, res) => {
+  const sitemap = await generateSitemap();
+  res.set("Content-Type", "application/xml");
+  res.send(sitemap);
+});
 
 app.get("/*", (req, res) => {
   // never hits this with way I have frotend setup (its on cloudflare)

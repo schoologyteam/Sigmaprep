@@ -58,9 +58,7 @@ export default function CreatePage() {
       dispatch(createDefaultUserClass());
     }
   }, [dispatch, shouldCreateDefaultClass]);
-  if (!user.id) {
-    return <LoginRequired title={'Ai Exam parser'} />;
-  }
+
   return (
     <Container style={{ minHeight: '60vh' }}>
       <Segment raised padded loading={loading}>

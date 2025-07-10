@@ -1,5 +1,10 @@
 import sqlExe from "#db/dbFunctions.js";
 import {
+  getClassesBySchoolId,
+  getSchoolByClassId,
+  getSchools,
+} from "#models/class/index.js";
+import {
   getLastRowManipulated,
   verifyUserOwnsRowId,
 } from "#utils/sqlFunctions.js";
@@ -34,7 +39,6 @@ export async function upsertPdf(user_id, id, link, class_id, name) {
   // TODO MAKES SURE USER OWNS CLASS THEY ARE INSERTING PDF INTO
   if (!id && !(await verifyUserOwnsRowId(class_id, user_id, "classes"))) {
     throw new Error("user is adding a pdf to a class which they do NOT own");
-    return;
   }
 
   const pdf_id = (
@@ -51,4 +55,34 @@ export async function upsertPdf(user_id, id, link, class_id, name) {
     )
   ).insertId;
   return await selectPdfs(`p.id=:pdf_id`, { pdf_id: id || pdf_id });
+}
+
+export async function generateSitemap() {
+  // get all schools add those
+  // get all classes add them
+  // get all groups add them
+  const schools = await getSchools();
+
+  let urlEntries = "";
+  const classes = [];
+
+  // First loop – add each school and collect its classes
+  for (const school of schools) {
+    const curClasses = await getClassesBySchoolId(school.id);
+    classes.push(...curClasses);
+
+    const loc = `https://quackprep.com/class/${school.school_name}`;
+    urlEntries += `  <url>\n    <loc>${loc}</loc>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
+  }
+
+  // Second loop – add each individual class
+  for (const cls of classes) {
+    const schoolName = (await getSchoolByClassId(cls.id)).school_name;
+    const classLoc = `https://quackprep.com/class/${schoolName}/${cls.id}/group`;
+
+    urlEntries += `  <url>\n    <loc>${classLoc}</loc>\n    <changefreq>weekly</changefreq>\n  </url>\n`;
+  }
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urlEntries}</urlset>`;
+  return xml;
 }
