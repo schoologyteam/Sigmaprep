@@ -9,6 +9,12 @@ export async function getClassCategories() {
       END, id;`);
 }
 
+export async function getAllClasses() {
+  return await sqlExe.executeCommand(`
+    select cl.id , s.school_name from classes cl join schools s on cl.school_id = s.id
+    `);
+}
+
 export async function selectClasses(WHERE, params) {
   // pulls in a random group from the class as to use on frotend to check if the class has any groups
   // sorts by the school_id and then by the updated_at (newest first)

@@ -1,8 +1,10 @@
 import sqlExe from "#db/dbFunctions.js";
 import {
+  getAllClasses,
   getClassesBySchoolId,
   getSchoolByClassId,
   getSchools,
+  getTotalClasses,
 } from "#models/class/index.js";
 import {
   getLastRowManipulated,
@@ -61,27 +63,25 @@ export async function generateSitemap() {
   // get all schools add those
   // get all classes add them
   // get all groups add them
-  const schools = await getSchools();
+  const classes_with_school = await getAllClasses();
 
   let urlEntries = "";
-  const classes = [];
 
   // First loop – add each school and collect its classes
-  for (const school of schools) {
-    const curClasses = await getClassesBySchoolId(school.id);
-    classes.push(
-      ...curClasses.map((cla) => ({ ...cla, school_name: school.school_name }))
-    );
-
-    const loc = `https://quackprep.com/class/${school.school_name}`;
-    urlEntries += `  <url>\n    <loc>${loc}</loc>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
-  }
-
-  // Second loop – add each individual class
-  for (const cls of classes) {
-    const classLoc = `https://quackprep.com/class/${cls.school_name}/${cls.id}/group`;
+  for (const x of classes_with_school) {
+    const classLoc = `https://quackprep.com/class/${x.school_name}/${x.id}/group`;
 
     urlEntries += `  <url>\n    <loc>${classLoc}</loc>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
+  }
+
+  // for all unique school names
+  const unique_school_names = {};
+  for (let i = 0; i < classes_with_school.length; i++) {
+    unique_school_names[classes_with_school[i].school_name] = 69;
+  }
+  for (const x of Object.keys(unique_school_names)) {
+    const loc = `https://quackprep.com/class/${x}`;
+    urlEntries += `  <url>\n    <loc>${loc}</loc>\n    <changefreq>yearly</changefreq>\n  </url>\n`;
   }
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urlEntries}</urlset>`;
