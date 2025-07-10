@@ -95,6 +95,12 @@ app.get("/sitemap.xml", async (req, res) => {
   res.send(sitemap);
 });
 
+app.get("/robots.txt", (req, res) => {
+  const robots = `User-agent: *\nDisallow: /api`;
+  res.set("Content-Type", "text/plain");
+  res.send(robots);
+});
+
 app.get("/*", (req, res) => {
   // never hits this with way I have frotend setup (its on cloudflare)
   res.redirect(process.env.FRONTEND_URL);
