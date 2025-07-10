@@ -69,7 +69,9 @@ export async function generateSitemap() {
   // First loop – add each school and collect its classes
   for (const school of schools) {
     const curClasses = await getClassesBySchoolId(school.id);
-    classes.push(...curClasses);
+    classes.push(
+      ...curClasses.map((cla) => ({ ...cla, school_name: school.school_name }))
+    );
 
     const loc = `https://quackprep.com/class/${school.school_name}`;
     urlEntries += `  <url>\n    <loc>${loc}</loc>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
@@ -77,10 +79,9 @@ export async function generateSitemap() {
 
   // Second loop – add each individual class
   for (const cls of classes) {
-    const schoolName = (await getSchoolByClassId(cls.id)).school_name;
-    const classLoc = `https://quackprep.com/class/${schoolName}/${cls.id}/group`;
+    const classLoc = `https://quackprep.com/class/${cls.school_name}/${cls.id}/group`;
 
-    urlEntries += `  <url>\n    <loc>${classLoc}</loc>\n    <changefreq>weekly</changefreq>\n  </url>\n`;
+    urlEntries += `  <url>\n    <loc>${classLoc}</loc>\n    <changefreq>monthly</changefreq>\n  </url>\n`;
   }
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urlEntries}</urlset>`;
