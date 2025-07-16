@@ -5,11 +5,21 @@ import {
   getGroupsByClassId,
   getGroupsByUserId,
   deleteGroupById,
+  getAllGroups,
 } from "#models/group/index.js";
 import { isCreator } from "#middleware/creatorMiddleware.js";
 import { BadRequestError } from "#utils/ApiError.js";
 
 const router = express.Router();
+
+router.get("/", async function (req, res, next) {
+  try {
+    const result = await getAllGroups();
+    res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+});
 
 router.get("/user/", isAuthenticated, async function (req, res, next) {
   try {

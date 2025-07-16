@@ -108,6 +108,7 @@ export default function GroupsList() {
             groups.map((group) => {
               return (
                 <GroupCard
+                  school_name={group.school_name}
                   key={group.id}
                   id={group.id}
                   name={group.name}

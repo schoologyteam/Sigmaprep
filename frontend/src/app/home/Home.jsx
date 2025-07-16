@@ -7,8 +7,7 @@ import Explainer from './Explainer';
 import HomeGraph from './Graph';
 import Testimonials from './Testimonials';
 import KeyFeatures from './KeyFeatures';
-import desktop from '/img/home/desktop.png';
-import mobile from '/img/home/mobile.png';
+// Removed desktop and mobile preview images as the hero section now shows action buttons instead of mockup images
 
 export default function Home() {
   const navigate = useNavigate();
@@ -32,7 +31,7 @@ export default function Home() {
         <Container>
           <Grid stackable verticalAlign='middle'>
             <Grid.Row>
-              <Grid.Column width={7} textAlign='left' style={{ paddingRight: '4em', paddingLeft: '3em' }}>
+              <Grid.Column width={8} textAlign='left' style={{ paddingRight: '4em', paddingLeft: '3em' }}>
                 <Header
                   as='h1'
                   style={{
@@ -86,75 +85,40 @@ export default function Home() {
                     </a>
                   </div>
                 </div>
-                <div style={{ display: 'flex', gap: '1rem' }}>
-                  <Button
-                    primary
-                    size='huge'
-                    onClick={() => dispatch(changeNavbarPage(navigate, '/class'))}
-                    style={{
-                      backgroundColor: '#4a90e2',
-                      color: 'white',
-                      padding: '1.2em 2em',
-                      borderRadius: '12px',
-                      fontWeight: '600',
-                      boxShadow: '0 4px 10px rgba(74, 144, 226, 0.3)',
-                      transition: 'all 0.3s ease',
-                    }}
-                    onMouseOver={(e) => {
-                      e.currentTarget.style.transform = 'translateY(-2px)';
-                      e.currentTarget.style.boxShadow = '0 6px 15px rgba(74, 144, 226, 0.4)';
-                    }}
-                    onMouseOut={(e) => {
-                      e.currentTarget.style.transform = 'none';
-                      e.currentTarget.style.boxShadow = '0 4px 10px rgba(74, 144, 226, 0.3)';
-                    }}
-                  >
-                    Get Started
-                    <Icon name='right arrow' style={{ marginLeft: '0.5em' }} />
-                  </Button>
-                </div>
+                {/* Primary call-to-action buttons moved to the right column */}
+                <div style={{ display: 'flex', gap: '1rem' }}></div>
               </Grid.Column>
 
-              <Grid.Column width={9} style={{ paddingRight: '4em' }}>
+              <Grid.Column width={8} textAlign='center' style={{ paddingRight: '4em' }}>
                 <div
                   style={{
-                    position: 'relative',
-                    maxWidth: '800px',
-                    marginLeft: 'auto',
-                    borderRadius: '24px',
-                    boxShadow: '0 30px 70px -15px rgba(0, 0, 100, 0.5)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '1.5rem',
+                    height: '100%',
                   }}
                 >
-                  <img
-                    src={desktop}
-                    alt='Desktop app preview'
-                    style={{
-                      borderRadius: '24px',
-                      width: '100%',
-                      height: 'auto',
-                    }}
-                  />
-                  <div
-                    style={{
-                      position: 'absolute',
-                      bottom: '-50px',
-                      right: '-30px',
-                      width: '40%',
-                      borderRadius: '20px',
-                      boxShadow: '0 25px 50px -10px rgba(0, 0, 100, 0.3)',
-                      transform: 'rotate(5deg)',
-                    }}
+                  {/* Red "Add an Exam" button */}
+                  <Button
+                    className='hero-action-btn hero-action-btn-red'
+                    onClick={() => dispatch(changeNavbarPage(navigate, '/create'))}
+                    basic={false}
                   >
-                    <img
-                      src={mobile}
-                      alt='Mobile app preview'
-                      style={{
-                        borderRadius: '20px',
-                        width: '100%',
-                        height: 'auto',
-                      }}
-                    />
-                  </div>
+                    <Icon name='upload' size='huge' fitted />
+                    <span>Add an Exam</span>
+                  </Button>
+
+                  {/* Blue "Study" button */}
+                  <Button
+                    className='hero-action-btn hero-action-btn-blue'
+                    onClick={() => dispatch(changeNavbarPage(navigate, '/class'))}
+                    basic={false}
+                  >
+                    <Icon name='book' size='huge' fitted />
+                    <span>Study</span>
+                  </Button>
                 </div>
               </Grid.Column>
             </Grid.Row>

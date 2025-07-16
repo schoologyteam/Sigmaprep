@@ -16,6 +16,12 @@ export function getGroupsByClassId(classId) {
   });
 }
 
+export function getAllGroups() {
+  return standardApiCall('get', `/api/group/`, null, GET_GROUPS, {
+    loadingComponent: 'List',
+  });
+}
+
 /**
  * AI SHIT
  * @param {FormData} Formdata - contains the files to upload

@@ -68,10 +68,8 @@ export default function CreatePage() {
               <Header as='h2'>
                 <Icon name='tasks' />
                 <Header.Content>
-                  AI Exam Parser
-                  <Header.Subheader>
-                    Add past exams and topics to the content bank to study smarter and help others do the same.
-                  </Header.Subheader>
+                  Add A Exam
+                  <Header.Subheader>Turn a picture of an exam into a studyable question bank!</Header.Subheader>
                 </Header.Content>
                 <Header as={'h4'}>
                   need more help? :{' '}

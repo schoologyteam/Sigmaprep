@@ -1,5 +1,6 @@
 import z from "zod";
 export const groupSelectSchema = z.object({
+  school_name: z.string(),
   id: z.number().int().positive(),
   name: z.string(),
   class_id: z.number().int().positive(),

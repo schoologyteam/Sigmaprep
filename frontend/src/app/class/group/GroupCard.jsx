@@ -5,10 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateCurrentGroupData, changeNavbarPage, selectNavbarState } from '@app/layout/navbar/navbarSlice';
 import { selectCanAndIsEdit } from '@app/auth/authSlice';
 import GroupEditor from '@app/creator/forms/GroupEdit';
-import { selectSchoolBySchoolId } from '../school/schoolSlice';
-export default function GroupCard({ id, name, class_id, description, created_by, type, school_id }) {
+export default function GroupCard({ id, name, class_id, description, created_by, type, school_id, school_name }) {
   const edit = useSelector(selectCanAndIsEdit());
-  const schoolName = useSelector(selectSchoolBySchoolId(school_id)).school_name;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   if (edit) {
@@ -17,6 +15,7 @@ export default function GroupCard({ id, name, class_id, description, created_by,
   return (
     <Card id={`group_${id}_card`} key={id} raised>
       <Card.Content>
+        <Card.Meta style={{ fontSize: '0.8em', color: 'grey' }}>{turnUnderscoreIntoSpace(school_name)}</Card.Meta>
         <Card.Header>{turnUnderscoreIntoSpace(name)}</Card.Header>
         <Card.Description>{description}</Card.Description>
       </Card.Content>
@@ -26,7 +25,7 @@ export default function GroupCard({ id, name, class_id, description, created_by,
           color='blue'
           onClick={() => {
             dispatch(updateCurrentGroupData(id, name));
-            dispatch(changeNavbarPage(navigate, `/class/${schoolName}/${class_id}/group/${id}/question`)); // /group may cause issues
+            dispatch(changeNavbarPage(navigate, `/class/${school_name}/${class_id}/group/${id}/question`)); // /group may cause issues
           }}
         >
           <Icon name='fork' />

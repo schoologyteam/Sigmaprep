@@ -27,6 +27,7 @@ import Announcement from './extra/Announcement.jsx';
 import Test from './test/Test.jsx';
 import ChatbotWidget from './chatbot/ChatbotWidget.jsx';
 import Blog from './blog/Blog.jsx';
+import List from './list/List.jsx';
 
 export default function AppRouter() {
   return (
@@ -65,6 +66,7 @@ export default function AppRouter() {
 
           <Route path='/leaderboard' element={<Leaderboard />} />
           <Route path='/stats' element={<Stats />} />
+          <Route path='/list' element={<List />} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
         <Footer /> {/* can move out of layout and changes how it looks */}

@@ -9,7 +9,7 @@ test("check if auto create class when user has no classes, given a new account c
 }) => {
   await page.goto("http://localhost:3001/");
   await login(page);
-  await page.getByRole("link", { name: "AI Exam Parser" }).click();
+  await page.getByRole("link", { name: "Add A Exam" }).click();
   await page.waitForTimeout(4000); // wait for 2 seconds
   // await page.getByText("Please select a class from").click();
   // await page.getByText("No Class Selected").click();
@@ -29,7 +29,7 @@ test("given a file and being logged in test that a user with a class can use the
   expect(fileExists).toBe(true);
   await page.goto("http://localhost:3001/");
   await login(page);
-  await page.getByRole("link", { name: "AI Exam Parser" }).click();
+  await page.getByRole("link", { name: "Add A Exam" }).click();
   await page.locator("#select-class-to-use-ai-create").click();
   await page
     .getByRole("option", { name: `${TEST_ACCOUNT_USER}'s Study Content` })
