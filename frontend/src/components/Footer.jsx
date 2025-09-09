@@ -67,11 +67,6 @@ export default function Footer() {
                 </List.Item>
               </List>
             </Grid.Column>
-            <Grid.Column width={3}>
-              <div>
-                A <strong style={{ fontSize: '1.5rem' }}>Maddox Schmidlkofer</strong> Production
-              </div>
-            </Grid.Column>
           </Grid.Row>
         </Grid>
         <Segment inverted textAlign='center' style={{ margin: '2em 0em 0em', padding: '0em' }}>
@@ -82,9 +77,6 @@ export default function Footer() {
               </List.Item>
               <List.Item as={Link} to='/privacy' rel='noopener noreferrer'>
                 Privacy Policy
-              </List.Item>
-              <List.Item as='a' href='mailto:maddoxpublic@gmail.com'>
-                maddoxpublic@gmail.com
               </List.Item>
             </List>
             <p style={{ marginTop: '1em' }}>© {currentYear} QuackPrep. All rights reserved.</p>
