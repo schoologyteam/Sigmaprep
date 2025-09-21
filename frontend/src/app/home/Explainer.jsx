@@ -3,6 +3,7 @@ import { Segment, Card, Icon, Container, Header, Grid } from 'semantic-ui-react'
 import { changeNavbarPage } from '@app/layout/navbar/navbarSlice';
 import { useNavigate } from 'react-router-dom';
 import ShowerVideo from './ShowerVideo';
+import { getSiteTitle } from 'maddox-js-funcs';
 export default function Explainer() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ export default function Explainer() {
     <Segment style={{ padding: '6em 1em', backgroundColor: '#f9f9f9' }} vertical>
       <Container>
         <Header as='h3' style={{ fontSize: '2em', textAlign: 'center' }}>
-          How to Use QuackPrep.com
+          How to Use {getSiteTitle(false)}
         </Header>
         <Header.Subheader style={{ textAlign: 'center' }}>
           Here's a quick guide to help you get started uploading exams to study with.

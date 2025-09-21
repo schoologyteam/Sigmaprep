@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Container, Grid, Header, List, Segment, Icon, Image } from 'semantic-ui-react';
+import { getSiteTitle } from 'maddox-js-funcs';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -79,7 +80,9 @@ export default function Footer() {
                 Privacy Policy
               </List.Item>
             </List>
-            <p style={{ marginTop: '1em' }}>© {currentYear} QuackPrep. All rights reserved.</p>
+            <p style={{ marginTop: '1em' }}>
+              © {currentYear} {getSiteTitle(false)}. All rights reserved.
+            </p>
           </Container>
         </Segment>
       </Container>

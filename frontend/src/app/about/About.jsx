@@ -1,6 +1,7 @@
 import { Container, Header, Grid, Image } from 'semantic-ui-react';
 import CreatorInfo from './TeamCard.jsx';
 import { contributors } from './contributors.js';
+import { getSiteTitle } from 'maddox-js-funcs';
 
 const About = () => {
   // add your stuff here if you contribute to the project
@@ -16,8 +17,8 @@ const About = () => {
         the current exam will be like and practice what will actually be on the exam. Finding paid exams randomly online or on
         quizlet doesn't work because students can't pay for exams and quizlet never has the needed exams and if it does you can't
         easily find it. Students then study other material, but don't study what the exam will actually be like and are unprepared
-        when they get to the actual exam, as it's nothing like what they studied. So we built quackprep.com that helps college
-        students always find and have free access to these past exams.
+        when they get to the actual exam, as it's nothing like what they studied. So we built {getSiteTitle(true)} that helps
+        college students always find and have free access to these past exams.
       </p>
 
       <Header as='h2' textAlign='center' style={{ fontSize: '2rem', marginBottom: '1rem' }}>

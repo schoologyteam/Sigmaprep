@@ -22,6 +22,7 @@ import {
   groupFetchLogic,
   groupUpdateLogic,
 } from './fetchFunction';
+import { getSiteTitle } from 'maddox-js-funcs';
 
 export default function Sentinel() {
   const {
@@ -54,11 +55,11 @@ export default function Sentinel() {
     } else if (className && schoolName) {
       document.title = schoolName + ' ' + className;
     } else if (schoolName) {
-      document.title = schoolName + ' - ' + 'Quackprep';
+      document.title = schoolName + ' - ' + `${getSiteTitle(false)}`;
     } else if (urlArr[1]) {
-      document.title = firstLetterUppercase(urlArr[1]) + ' - ' + 'Quackprep';
+      document.title = firstLetterUppercase(urlArr[1]) + ' - ' + `${getSiteTitle(false)}`;
     } else {
-      document.title = 'QuackPrep | Past Exams | AI Study Tools';
+      document.title = `${getSiteTitle(false)} | Past Exams | AI Study Tools`;
     }
   }, [location, schoolName, className]);
 
