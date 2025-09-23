@@ -9,6 +9,9 @@ export const corsOrigins = [
   "https://quackprep.com",
   "https://www.quackprep.com",
   "https://quackprep.pages.dev",
+  "https://theducklair.cok",
+  "https://tinyexams.com",
+  "https://exampredictor.org",
 ];
 if (secrets.NODE_ENV === NODE_ENVS_AVAILABLE.local) {
   corsOrigins.push("http://localhost:3001"); // maybe bad pratice
