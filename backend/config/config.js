@@ -9,7 +9,7 @@ export const corsOrigins = [
   "https://quackprep.com",
   "https://www.quackprep.com",
   "https://quackprep.pages.dev",
-  "https://theducklair.cok",
+  "https://theducklair.com",
   "https://tinyexams.com",
   "https://exampredictor.org",
 ];
